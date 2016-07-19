@@ -1,0 +1,37 @@
+<tool id="alveo_item_list_importer" name="Get Alveo Item Lists" version="0.01" force_history_refresh="True">
+    <description>Retrieves item list metadata.</description>
+
+    <requirements>
+        <requirement type="package" version="0.4">pyalveo</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        alveo_item_list_importer.py --api_key $api_key --output $item_list
+    </command>
+
+
+    <inputs>
+        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain" value="Alveo Item Lists"/>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="item_list" label="${job_name}"/>
+    </outputs>
+
+    <help>Import Item Lists from Alveo. This imports the lists, but does not download the individual items.
+        That task is performed by the *Get Files from Alveo* tool.
+    </help>
+
+    <citations>
+        <citation type='bibtex'>
+            @article{cassidy2014alveo,
+              title={The alveo virtual laboratory: a web based repository API},
+              author={Cassidy, Steve and Estival, Dominique and Jones, Tim and Sefton, Peter and Burnham, Denis and Burghold, Jared and others},
+              year={2014},
+              publisher={Reykjavik, Iceland: European Language Resources Association}
+            }
+        </citation>
+    </citations>
+</tool>

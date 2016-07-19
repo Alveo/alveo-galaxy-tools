@@ -1,0 +1,39 @@
+<tool id="alveo_api_key_storer" name="Store Alveo API Key" version="0.01" force_history_refresh="True">
+    <description>for use with Alveo tools</description>
+
+    <requirements>
+        <requirement type="package" version="0.4">pyalveo</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        alveo_api_key.py --api_key $api_key --output_path $output
+    </command>
+
+    <inputs>
+        <param name="api_key" type="text" size="30" label="API Key" help="Your Alveo API key"/>
+    </inputs>
+
+    <outputs>
+        <data format="txt" name="output" label="Alveo API key" />
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="api_key" value="9swHm5MgVxdnuhrqdqwk" />
+            <output name="output" file="api-key.dat" compare="contains" />
+        </test>
+    </tests>
+
+    <help>Stores Alveo API keys for use with the Alveo Galaxy tools.</help>
+
+    <citations>
+        <citation type='bibtex'>
+            @article{cassidy2014alveo,
+              title={The alveo virtual laboratory: a web based repository API},
+              author={Cassidy, Steve and Estival, Dominique and Jones, Tim and Sefton, Peter and Burnham, Denis and Burghold, Jared and others},
+              year={2014},
+              publisher={Reykjavik, Iceland: European Language Resources Association}
+            }
+        </citation>
+    </citations>
+</tool>

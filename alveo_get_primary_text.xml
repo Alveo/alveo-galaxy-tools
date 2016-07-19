@@ -1,0 +1,68 @@
+<tool id="alveo_get_primary_text" name="Get Text from Alveo" version="0.01" force_history_refresh="True">
+    <description>Downloads primary text from the items in an Alveo Item List</description>
+
+    <requirements>
+        <requirement type="package" version="0.4">pyalveo</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        alveo_get_primary_text.py --api_key $api_key --item_list_url $item_list_url --output_path ItemListData
+    </command>
+
+    <inputs>
+        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="import_list" type="data" format="tabular" label="Imported Alveo Item List" help=""/>
+
+        <param name="item_list_url" type="select" label="Alveo Item List" help="The Alveo Item List you wish to import">
+            <options from_dataset="import_list">
+                <column name="name" index="0"/>
+                <column name="value" index="1"/>
+            </options>
+        </param>
+
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain" value="Item List downloaded from Alveo"/>
+    </inputs>
+
+    <outputs>
+        <collection type="list" label="$job_name" name="output1">
+            <discover_datasets pattern="(?P&lt;designation&gt;[^_]+)_(?P&lt;ext&gt;.+)" directory="ItemListData"/>
+        </collection>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="api_key" value="api-key.dat"/>
+            <param name="import_list" value="item-lists.dat"/>
+            <param name="item_list_url" value="https://app.alveo.edu.au/item_lists/180"/>
+            <param name="output_path" value="test_out"/>
+            <output_collection name="output1" type="list" count="6">
+                    <element name="GCSAusE02">
+                        <assert_contents>
+                            <has_text_matching expression="background noises"/>
+                        </assert_contents>
+                    </element>
+            </output_collection>
+        </test>
+        <test>
+            <param name="api_key" value="api-key.dat"/>
+            <param name="import_list" value="item-lists.dat"/>
+            <param name="item_list_url" value="https://app.alveo.edu.au/item_lists/52"/>
+            <param name="output_path" value="test_out"/>
+            <output_collection name="output1" type="list" count="0">
+            </output_collection>
+        </test>
+    </tests>
+
+    <help>Downloads the primary text for each item from an Alveo Item List</help>
+    <citations>
+        <citation type='bibtex'>
+            @article{cassidy2014alveo,
+              title={The alveo virtual laboratory: a web based repository API},
+              author={Cassidy, Steve and Estival, Dominique and Jones, Tim and Sefton, Peter and Burnham, Denis and Burghold, Jared and others},
+              year={2014},
+              publisher={Reykjavik, Iceland: European Language Resources Association}
+            }
+        </citation>
+    </citations>
+</tool>
