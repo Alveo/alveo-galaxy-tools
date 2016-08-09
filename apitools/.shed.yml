@@ -1,5 +1,8 @@
 categories: [Data Source]
 description: alveo import
+homepage_url: http://alveo.edu.au/
 long_description: Tools to import data from the Alveo VL
 name: alveoimport
 owner: stevecassidy
+exclude:
+    - README.md

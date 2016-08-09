@@ -1,0 +1,76 @@
+<tool id="query_textgrids" name="Search TextGrid" version="0.01" force_history_refresh="True">
+    <description>to find matching segments</description>
+
+    <requirements>
+        <requirement type="package" version="1.4.2">tgt</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        query_textgrids.py --textgrid "${",".join(map(str, $textgrid))}" --identifier "${",".join(map(str, [t.element_identifier for t in $textgrid]))}" --tier $tier --regex '$regex' --output_path $output
+    </command>
+
+    <inputs>
+        <param name="textgrid" type="data" multiple="true" format="TextGrid" label="TextGrid" help="The TextGrid file"/>
+        <param name="tier" type="text" label="Tier name" help="e.g MAU, ORT"/>
+        <param name="regex" type="text" label="Regular Expressoion to match segments">
+            <sanitizer>
+              <valid initial="string.printable">
+               <remove value="&apos;"/>
+              </valid>
+              <mapping initial="none">
+                <add source="&apos;" target="__sq__"/>
+              </mapping>
+            </sanitizer>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="Query Results" />
+    </outputs>
+
+
+    <tests>
+        <test>
+            <param name="tier" value="MAU"/>
+            <param name="regex" value=".*"/>
+            <param name="textgrid" value="textgrids/1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
+            <output name="output">
+                <assert_contents>
+                    <has_text text="start"/>
+                    <has_text text="3:"/>
+                    <has_text text="0.55"/>
+                    <has_text text="1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
+                </assert_contents>
+            </output>
+        </test>
+        <test>
+            <param name="tier" value="MAU"/>
+            <param name="regex" value="(a|e|{|}|6|3|i|U|O|I)"/>
+            <param name="textgrid" value="textgrids/1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
+            <output name="output">
+                <assert_contents>
+                    <has_text text="start"/>
+                    <has_text text="3:"/>
+                    <has_text text="0.81"/>
+                    <has_text text="1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+
+    <help>Search for segments within a TextGrid file. Outputs a table with start, end, duration,
+    label and filename.  Use a regular expression to match segments, eg. to match a or O or I
+    use (a|O|I), for any SAMPA-AU short vowel try (a|e|{|}|6|3|i|U|O|I) .</help>
+
+    <citations>
+        <citation type='bibtex'>
+            @inproceedings{Buschmeir2013,
+            author = {{Hendrik Buschmeier}, Marcin Wlodarczak},
+            booktitle = {Tagungsband der 24. Konferenz zur Elektronischen Sprachsignalverarbeitung (ESSV 2013)},
+            pages = {152--157},
+            title = {{TextGridTools: A TextGrid Processing and Analysis Toolkit for Python}},
+            year = {2013}
+            }
+        </citation>
+    </citations>
+</tool>

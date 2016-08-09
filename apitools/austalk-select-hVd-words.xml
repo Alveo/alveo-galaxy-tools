@@ -1,0 +1,44 @@
+<tool id="austalk-select-hvd-words" name="Find HVD words in Austalk" version="0.01" force_history_refresh="True">
+    <description>for a single speaker</description>
+
+    <requirements>
+        <requirement type="package" version="1.4.2">tgt</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        austalk-select-hVd-words.py  --api_key $api_key --speaker $speaker --words $words --output $output
+    </command>
+
+    <inputs>
+        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="speaker" type="text" format="text" label="Speaker ID" help="e.g. 1_123"/>
+        <param name="words" type="select" multiple="false" label="Word List" display="radioboxes">
+            <option value='all'>All hVd words</option>
+            <option value='monopthongs'>hVd monopthongs</option>
+            <option value='dipthongs'>hVd dipthongs</option>
+        </param>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the output to remind you what it contains" value="Query Results"/>
+    </inputs>
+
+    <outputs>
+        <data format="tabular" name="output" label="$job_name" />
+    </outputs>
+
+    <tests>
+    </tests>
+
+    <help>Find items corresponding to the hVd words for this Austalk speaker.</help>
+
+    <citations>
+        <citation type='bibtex'>
+            @inproceedings{Buschmeir2013,
+            author = {{Hendrik Buschmeier}, Marcin Wlodarczak},
+            booktitle = {Tagungsband der 24. Konferenz zur Elektronischen Sprachsignalverarbeitung (ESSV 2013)},
+            pages = {152--157},
+            title = {{TextGridTools: A TextGrid Processing and Analysis Toolkit for Python}},
+            year = {2013}
+            }
+        </citation>
+    </citations>
+</tool>

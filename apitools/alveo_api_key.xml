@@ -19,7 +19,7 @@
 
     <tests>
         <test>
-            <param name="api_key" value="9swHm5MgVxdnuhrqdqwk" />
+            <param name="api_key" value="your api key here" />
             <output name="output" file="api-key.dat" compare="contains" />
         </test>
     </tests>

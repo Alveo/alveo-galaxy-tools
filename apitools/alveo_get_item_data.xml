@@ -1,0 +1,68 @@
+<tool id="alveo_get_item_data" name="Get Alveo Data for Items" version="0.01" force_history_refresh="True">
+    <description>Downloads files from the items in an Galaxy list of items</description>
+
+    <requirements>
+        <requirement type="package" version="0.4">pyalveo</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        alveo_get_item_data.py --api_key $api_key --item_list $item_list --patterns $patterns,$patternselect --output_path ItemListData
+    </command>
+
+    <inputs>
+        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="item_list" type="data" format="tabular" label="Item List (table)" help=""/>
+
+        <param name="patternselect" type="select" multiple="true" label="Predefined imports" display="checkboxes">
+            <option value='*'>All Files</option>
+            <option value='*speaker16.wav'>Austalk 16bit/16kHz Speaker Headset WAV (*speaker16.wav)</option>
+            <option value='*plain.txt'>Plain text documents (*plain.txt)</option>
+            <option value='*.txt'>All text documents (*.txt)</option>
+            <option value=''>Other - enter pattern below</option>
+        </param>
+
+        <param name="patterns" type="text" label="File patterns to import"
+               optional="true"
+               help="One or more file patterns separated by commas eg. *.wav,*.txt"/>
+
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the output to remind you what it contains" value="Alveo Data"/>
+    </inputs>
+
+    <outputs>
+        <collection type="list" label="$job_name" name="output1">
+            <discover_datasets pattern="(?P&lt;designation&gt;[^#]+)#(?P&lt;ext&gt;.+)" directory="ItemListData"/>
+        </collection>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name="api_key" value="api-key.dat"/>
+            <param name="item_list" value="hvd-sample-items.dat"/>
+            <param name="patterns" value="*.TextGrid"/>
+            <param name="patternselect" value=""/>
+            <param name="output_path" value="test_out"/>
+            <output_collection name="output1" type="list" count="5">
+                    <element name="1_1308_2_22_023">
+                        <assert_contents>
+                            <has_text_matching expression="xmax = 1.020000"/>
+                        </assert_contents>
+                    </element>
+            </output_collection>
+        </test>
+    </tests>
+
+    <help>Downloads files from a local list of Alveo items. You can download all files or those matching
+        a wildcard pattern (e.g. *.txt).  Results will be stored as a dataset collection in
+        your history.</help>
+    <citations>
+        <citation type='bibtex'>
+            @article{cassidy2014alveo,
+              title={The alveo virtual laboratory: a web based repository API},
+              author={Cassidy, Steve and Estival, Dominique and Jones, Tim and Sefton, Peter and Burnham, Denis and Burghold, Jared and others},
+              year={2014},
+              publisher={Reykjavik, Iceland: European Language Resources Association}
+            }
+        </citation>
+    </citations>
+</tool>

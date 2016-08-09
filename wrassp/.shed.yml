@@ -1,0 +1,6 @@
+categories: [NLP]
+description: wrassp signal processing
+homepage_url: http://alveo.edu.au/
+long_description: Tools for speech signal processign using the wrassp library
+name: wrassp
+owner: stevecassidy

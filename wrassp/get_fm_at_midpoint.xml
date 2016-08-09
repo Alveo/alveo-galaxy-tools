@@ -1,0 +1,45 @@
+<tool id="get_fm_at_midpoint" name="Get Formants at segment midpoint" version="0.01" force_history_refresh="True">
+    <description>using wrassp formant tracker</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">R</requirement>
+        <requirement type="package" version="0.1.4">r-wrassp</requirement>
+    </requirements>
+
+    <command interpreter="bash">
+        r_wrapper.sh $__tool_directory__/get_fm_at_midpoint.R --args ${segments} ${output} --wavfile "${",".join(map(str, $wavfile))}" --identifier "${",".join(map(str, [w.element_identifier for w in $wavfile]))}"
+    </command>
+
+    <inputs>
+        <param name="segments" type="data" format="tabular" label="Segment List" help=""/>
+        <param name="wavfile" type="data" multiple="true" format="wav" label="Audio File(s)" help="Audio file(s) in WAV format"/>
+    </inputs>
+
+    <outputs>
+        <data format_source="segments" name="output" label="Formants" />
+    </outputs>
+
+
+    <tests>
+        <test>
+            <param name="segments" value="qresult.dat"/>
+            <param name="wavfile" value="wavs/1_1308_1_2_034-ch6-speaker16.wav#wav"/>
+            <output name="output" file="formants_mid.dat"/>
+        </test>
+    </tests>
+
+    <help>Calculate the formant tracks for segments of some audio files
+    and extract the value at the midpoint. Tabulate these values in the result.</help>
+
+    <citations>
+        <citation type='bibtex'>
+            @Manual{,
+              title = {wrassp: an R wrapper to the ASSP Library},
+              author = {Lasse Bombien and Raphael Winkelmann and Michel
+                Scheffers},
+              year = {2016},
+              note = {R package version 0.1.4},
+            }
+        </citation>
+    </citations>
+</tool>

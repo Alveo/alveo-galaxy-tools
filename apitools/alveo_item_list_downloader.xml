@@ -51,7 +51,7 @@
             <param name="patternselect" value="*plain.txt"/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="6">
-                    <element name="GCSAusE02-plain.txt">
+                    <element name="GCSAusE02">
                         <assert_contents>
                             <has_text_matching expression="background noises"/>
                         </assert_contents>
@@ -66,7 +66,7 @@
             <param name="patternselect" value=""/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="6">
-                    <element name="GCSAusE02-plain.txt">
+                    <element name="GCSAusE02">
                         <assert_contents>
                             <has_text_matching expression="background noises"/>
                         </assert_contents>

@@ -23,14 +23,19 @@ def get_item_list(api_key, item_list_url):
 # this file name pattern allows galaxy to discover the dataset designation and type
 FNPAT = "%(designation)s_%(ext)s"
 
-def galaxy_name(fname):
-    """construct a filename suitable for Galaxy dataset discovery"""
+
+def galaxy_name(itemname, fname):
+    """construct a filename suitable for Galaxy dataset discovery
+    designation - (dataset identifier) is the file basename
+    ext - defines the dataset type and is the file extension
+    """
 
     root, ext = os.path.splitext(fname)
     ext = ext[1:] # remove initial .
-    fname = FNPAT % {'designation': fname, 'ext': ext}
+    fname = FNPAT % {'designation': itemname, 'ext': ext}
 
     return fname
+
 
 def download_documents(item_list, patterns, output_path):
     """
@@ -54,7 +59,7 @@ def download_documents(item_list, patterns, output_path):
         for doc in documents:
             for pattern in patterns:
                 if not pattern == '' and fnmatch(doc.get_filename(), pattern):
-                    fname = galaxy_name(doc.get_filename())
+                    fname = galaxy_name(item.metadata()['alveo:metadata']['dc:identifier'], doc.get_filename())
                     try:
                         doc.download_content(dir_path=output_path, filename=fname)
                         downloaded.append(doc.get_filename())

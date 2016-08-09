@@ -1,8 +1,7 @@
 Alveo Galaxy Tools
 ==================
 
-Tools that make use of the Alveo API to import data into the Galaxy workflow
-engine. These tools rely on the pyalveo Python module. 
+Galaxy tools written to process speech and language data for the Alveo project.
 
 Testing
 -------
@@ -13,7 +12,7 @@ for an account that has access to the AusNC collections on Alveo.  Enter this
 in the file test-data/api-key.dat.  You should then be able to run the tests
 with:
 
-    % planemo test
+    % planemo test --test_data test-data apitools/*.xml textgrid/*.xml wrassp/*.xml
 
 run from this directory.  This generates a file tool_test_output.html with the
 summary test results.  
@@ -21,16 +20,11 @@ summary test results.
 Tools
 -----
 
-Store Alveo API Key - prompts for an API key from Alveo, verifies that it works
-and stores it for use by later tools.
+Tools are grouped into sub-directories based on their main function and their
+common dependencies (requirements).  
 
-Get Alveo Item Lists - retrieves metadata for the item lists defined by the
-user and any world-readable item lists that are available.  This allows the later
-selection of an item list for downloading etc.
+ * apitools - tools that use the pyalveo library to work against the Alveo API
+ * textgrid - tools that use the tgt python library to work with TextGrid files
+ * wrassp - tools that do signal processing with the R wrassp package
 
-Get Text from Alveo - get text documents for each item in an item list. Store the
-results as a dataset collection.
-
-Get Files from Alveo - get files of different kinds for each item in an item list,
-the tool can use a filename pattern (eg. \*.wav) to match files to download. Store
-the results as a dataset collection.
+Since the tools work together, there is shared test data in the test-data directory.
