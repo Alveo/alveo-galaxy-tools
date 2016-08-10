@@ -2,7 +2,7 @@
     <description>Downloads files from the items in an Alveo Item List</description>
 
     <requirements>
-        <requirement type="package" version="0.4">pyalveo</requirement>
+        <requirement type="package" version="0.6">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">
