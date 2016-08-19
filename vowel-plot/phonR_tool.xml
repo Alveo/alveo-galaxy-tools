@@ -1,0 +1,45 @@
+<tool id="vowel_plot" name="Plot Vowels" version="0.01" force_history_refresh="True">
+    <description>Using phonR to produce a Vowel Plot</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">R</requirement>
+        <requirement type="package" version="1.0.3">phonR</requirement>
+    </requirements>
+
+    <command interpreter="Rscript">
+        $__tool_directory__/phonR_tool.R --input="${input}" --outdir="$htmlfile.files_path" --htmlfile="$htmlfile" --column1="${f1}" --column2="${f2}" --pretty="${pretty}" --ellipse="${ellipse}" --tokens="${tokens}" --means="${means}"
+    </command>
+
+    <inputs>
+        <param name="input" type="data" format="tabular" label="Segment List" help=""/>
+        <param name="f1" type="data_column" data_ref="input" label="Column for f1"/>
+        <param name="f2" type="data_column" data_ref="input" label="Column for f2"/>
+        <param name="pretty" type="boolean" label="Make Pretty" 
+               truevalue="TRUE" falsevalue="FALSE" checked="True"
+               help="Will apply various beautification techniques." />
+        <param name="ellipse" type="boolean" label="Add Ellipses" 
+               truevalue="TRUE" falsevalue="FALSE" checked="True"
+               help="Will add an ellipse around the location of each vowel cluster." />
+        <param name="tokens" type="boolean" label="Add Tokens" 
+               truevalue="TRUE" falsevalue="FALSE" checked="True"
+               help="Will add tokens to the plot." />
+        <param name="means" type="boolean" label="Add Means" 
+               truevalue="TRUE" falsevalue="FALSE" checked="True"
+               help="Will add means to the plot." />
+    </inputs>
+
+    <outputs>
+        <data format="html" name="htmlfile" label="output.html" />
+    </outputs>
+
+
+    <tests>
+        <test>
+        </test>
+    </tests>
+
+    <help>
+        Will make a vowel plot from given data. Best used from data directly run from the "Get Formants at segment midpoint" Tool.
+    </help>
+
+</tool>
