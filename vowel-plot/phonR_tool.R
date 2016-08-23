@@ -11,12 +11,16 @@ option_specification = matrix(c(
   'outdir', 'f', 1, 'character',
   'htmlfile', 'h', 1, 'character',
   'inputfile', 'i', 1, 'character',
-  'column1', 'a', 1, 'integer',
-  'column2', 'b', 1, 'integer',
+  'column1', 'y', 1, 'integer',
+  'column2', 'z', 1, 'integer',
+  'columnvowels', 'x', 1, 'integer',
   'pretty', 'p', 1, 'logical',
   'ellipse', 'e', 1, 'logical',
   'tokens', 't', 1, 'logical',
-  'means', 'm', 1, 'logical'
+  'means', 'm', 1, 'logical',
+  'cextokens', 'c', 1, 'numeric',
+  'alphatokens', 'a', 1, 'numeric',
+  'cexmeans', 'b', 1, 'numeric'
 ), byrow=TRUE, ncol=4);
 
 # Parse options
@@ -34,15 +38,15 @@ data = read.table(options$inputfile,sep="\t", header=TRUE);
 
 png(pngfile);
 
-plotVowels(data[,options$column1], data[,options$column2], data[,'vowel'], plot.tokens = options$tokens, pch.tokens = data[,'vowel'], cex.tokens = 1.2, 
-          alpha.tokens = 0.2, plot.means = options$means, pch.means = data[,'vowel'], cex.means = 2, var.col.by = data[,'vowel'], 
-          ellipse.line = options$ellipse, pretty = options$pretty)
+plotVowels(data[,options$column1], data[,options$column2], data[,options$columnvowels], plot.tokens = options$tokens, 
+          pch.tokens = data[,options$columnvowels], cex.tokens = options$cextokens, alpha.tokens = options$alphatokens, 
+          plot.means = options$means, pch.means = data[,options$columnvowels], cex.means = options$cexmeans, 
+          var.col.by = data[,options$columnvowels], ellipse.line = options$ellipse, pretty = options$pretty)
 dev.off();
 
 htmlfile_handle <- file(htmlfile)
 html_output = c('<html><body>',
                 '<h3>Result:</h3><img src="pngfile.png"/>',
-                '<a download="pngfile.png" href="pngfile.png" title="VowelPlot" type="button">Download Plot</a>',
                 '</html></body>');
 writeLines(html_output, htmlfile_handle);
 close(htmlfile_handle);
