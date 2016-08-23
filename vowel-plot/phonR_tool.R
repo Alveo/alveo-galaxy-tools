@@ -33,11 +33,12 @@ htmlfile <- gsub("[ ]+", "", paste(options$htmlfile))
 data = read.table(options$inputfile,sep="\t", header=TRUE);
 
 png(pngfile);
-with(data,plotVowels(f1, f2, vowel, plot.tokens = options$tokens, pch.tokens = vowel, cex.tokens = 1.2, 
-                     alpha.tokens = 0.2, plot.means = options$means, pch.means = vowel, cex.means = 2, var.col.by = vowel, 
-                     ellipse.line = options$ellipse, pretty = options$pretty))
 
+plotVowels(data[,options$column1], data[,options$column2], data[,'vowel'], plot.tokens = options$tokens, pch.tokens = data[,'vowel'], cex.tokens = 1.2, 
+          alpha.tokens = 0.2, plot.means = options$means, pch.means = data[,'vowel'], cex.means = 2, var.col.by = data[,'vowel'], 
+          ellipse.line = options$ellipse, pretty = options$pretty)
 dev.off();
+
 htmlfile_handle <- file(htmlfile)
 html_output = c('<html><body>',
                 '<h3>Result:</h3><img src="pngfile.png"/>',
