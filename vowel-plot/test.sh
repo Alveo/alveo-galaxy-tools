@@ -1,0 +1,1 @@
+Rscript phonR_tool.R --input="test.tsv" --outdir="~/galaxy-tools/tools/alveo-galaxy-tools/vowel-plot/" --htmlfile="out.html" --column1="5" --column2="6" --pretty="TRUE" --ellipse="TRUE" --tokens="TRUE" --means="TRUE"
