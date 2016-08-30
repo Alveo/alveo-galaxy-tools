@@ -16,7 +16,7 @@ def parser():
     return parser.parse_args()
 
 def get_item_list(api_key, item_list_url):
-    client = pyalveo.Client(api_key=api_key, api_url=API_URL)
+    client = pyalveo.Client(api_key=api_key, api_url=API_URL, use_cache=False)
     return client.get_item_list(item_list_url)
 
 # this file name pattern allows galaxy to discover the dataset designation and type

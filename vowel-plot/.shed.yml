@@ -1,0 +1,12 @@
+categories: [NLP]
+description: Vowel Plots with phonR
+homepage_url: http://alveo.edu.au/
+long_description: Tools to plot vowel formants with the PhonR package
+name: alveoimport
+owner: stevecassidy
+exclude:
+    - test.bat
+    - test.sh
+    - test.tsv
+    - femaletest.tsv
+    - .gitignore

@@ -31,6 +31,7 @@ def read_item_list(filename, client):
         for row in csvreader:
             itemurls.append(row['ItemURL'])
 
+    print("ITEMS:", itemurls)
     itemlist = pyalveo.ItemGroup(itemurls, client)
 
     return itemlist
@@ -87,7 +88,7 @@ def main():
     try:
         api_key = open(args.api_key, 'r').read().strip()
 
-        client = pyalveo.Client(api_url=API_URL, api_key=api_key)
+        client = pyalveo.Client(api_url=API_URL, api_key=api_key, use_cache=False)
 
         item_list = read_item_list(args.item_list, client)
         patterns = args.patterns.split(',')

@@ -34,7 +34,7 @@ def find_hVd_words(api_key, speakerid, output, words='all'):
     """Find words in the Austalk corpus
     """
 
-    client = pyalveo.Client(api_key, API_URL)
+    client = pyalveo.Client(api_key, API_URL, use_cache=False)
 
     query = PREFIXES + """
 SELECT distinct ?item ?prompt ?compname

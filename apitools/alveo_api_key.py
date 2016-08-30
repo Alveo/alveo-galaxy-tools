@@ -27,7 +27,7 @@ def write_key(api_key, output_path, client_module=pyalveo):
     :raises: pyalveo.APIError if the API request is not successful
 
     """
-    client = client_module.Client(api_key, API_URL)
+    client = client_module.Client(api_key, API_URL, use_cache=False)
     outfile = open(output_path, 'w')
     outfile.write(api_key)
     outfile.close()

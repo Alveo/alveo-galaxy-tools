@@ -26,5 +26,6 @@ common dependencies (requirements).
  * apitools - tools that use the pyalveo library to work against the Alveo API
  * textgrid - tools that use the tgt python library to work with TextGrid files
  * wrassp - tools that do signal processing with the R wrassp package
+ * vowel-plot - plot vowel formants with the R phonR package 
 
 Since the tools work together, there is shared test data in the test-data directory.
