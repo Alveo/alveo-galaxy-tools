@@ -1,0 +1,6 @@
+categories: [NLP]
+description: ParseEval
+homepage_url: http://alveo.edu.au/
+long_description: Quantitative Evaluation of Competing Syllable Parses
+name: parseeval
+owner: stevecassidy

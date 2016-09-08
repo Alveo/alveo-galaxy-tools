@@ -1,0 +1,133 @@
+<tool id="ParseEval" name="ParseEval" version="1.0.0">
+
+	<description>Analyse articulatory data</description>
+
+    <requirements>
+        <requirement type="set_environment">R_SCRIPT_PATH</requirement>
+        <requirement type="package" version="3.1.2">R</requirement>
+        <requirement type="package" version="0.20.33">R_lattice</requirement>
+        <requirement type="package" version="0.6.26">R_latticeExtra</requirement>
+        <requirement type="package" version="2.0.0">R_gridExtra</requirement>
+    </requirements>
+
+	<command interpreter="sh">
+		r_wrapper.sh $script_file $__tool_directory__
+	</command>
+
+	<inputs>
+		<param name="c1a" type="float" size="10" value="0" label="Gestural plateau duration" help="Articulatory data for the immediate pre-vocalic consonant" />
+		<param name="c1b" type="float" size="10" value="0" label="Standard Deviation" help="Articulatory data for the immediate pre-vocalic consonant" />
+		<param name="c2a" type="float" size="10" value="0" label="Gestural plateau duration" help="Articulatory data for the second consonant in tri-consonantal or the first consonant in bi-consonantal clusters" />
+		<param name="c2b" type="float" size="10" value="0" label="Standard Deviation" help="Articulatory data for the second consonant in tri-consonantal or the first consonant in bi-consonantal clusters" />
+		<param name="c3a" type="float" size="10" value="0" label="Gestural plateau duration" help="Articulatory data of the initial consonant in tri-consonantal clusters" />
+		<param name="c3b" type="float" size="10" value="0" label="Standard Deviation" help="Articulatory data of the initial consonant in tri-consonantal clusters" />
+		<param name="cipi12a" type="float" size="10" value="0" label="Inter-plateau duration" help="Duration of the interval between the plateaus of the first two consonants in tri-consonantal clusters" />
+		<param name="cipi12b" type="float" size="10" value="0" label="Standard Deviation" help="Duration of the interval between the plateaus of the first two consonants in tri-consonantal clusters" />
+		<param name="cipi23a" type="float" size="10" value="0" label="Inter-plateau duration" help="Duration of the interval between the plateaus of the first two consonants in bi-consonantal clusters or the duration of the interval between the middle and the pre-vocalic consonants in tri-consonantal clusters" />
+		<param name="cipi23b" type="float" size="10" value="0" label="Standard Deviation" help="Duration of the interval between the plateaus of the first two consonants in bi-consonantal clusters or the duration of the interval between the middle and the pre-vocalic consonants in tri-consonantal clusters" />
+		<param name="voweld" type="integer" size="10" value="0" label="Articulatory duration of the vocalic gesture" />
+		<param name="anchor" type="integer" size="10" optional="true" label="Number of stepwise increases in variability simulated by the model" />
+		<param name="var_anchor" type="integer" size="10" optional="true" label="Size (in milliseconds) of each stepwise increase in variability" />
+		<param name="types" type="integer" size="10" value="2" label="Number of different word types" help="Must be either 2 for bi-consonantal clusters or 3 for tri-consonantal clusters">
+			<validator type="in_range" min="2" max="3" message="Number of different word types must be either 2 or 3" />
+		</param>
+		<param name="words" type="integer" size="10" value="12" label="Number of words (stimuli) for all word types" help="Must be divisible by the value of types above without a remainder" />
+		<param name="simN" type="integer" size="10" optional="true" label="Number of simulation runs over which hit rate is calculated" />
+		<param name="RE_rsd" type="float" size="10" value="0" label="Relative standard deviation of the right edge to anchor interval" />
+		<param name="CC_rsd" type="float" size="10" value="0" label="Relative standard deviation of the center to anchor interval" />
+		<param name="LE_rsd" type="float" size="10" value="0" label="Relative standard deviation of the left edge to anchor interval" />
+		<param name="job_name" type="text" size="25" label="Supply a name for the outputs to remind you what they contain" value="ParseEval"/>
+	</inputs>
+	<outputs>
+		<data format="html" name="html_file" label="${job_name}"/>
+	</outputs>
+
+	<configfiles>
+	    <configfile name="script_file">
+
+	    	if(${words} %% ${types} != 0) {
+	    		stop("Number of words must be divisible by the number of types without a remainder")
+	    	}
+
+	    	require(lattice , quietly=T)
+			require(latticeExtra , quietly=T)
+			require(gridExtra , quietly=T)
+
+			args &lt;- commandArgs(trailingOnly = TRUE)
+	    	source(file.path(args[1], "parseval.R"))
+
+	    	if(!file.exists("${html_file.files_path}")) {
+	    		dir.create("${html_file.files_path}")
+	    	}
+
+	    	write("&lt;pre&gt;", file="${html_file}", append=TRUE)
+	    	sink("${html_file}", append=TRUE)
+
+	    	tryCatch({
+	    		set.seed(2954)
+	    		parse&lt;-parseEval(c1=c(${c1a},${c1b}), c2=c(${c2a},${c2b}), c3=c(${c3a},${c3b}), cipi12=c(${cipi12a},${cipi12b}), cipi23=c(${cipi23a},${cipi23b}), voweld=${voweld}, anchor=${anchor}, var_anchor=${var_anchor}, types=${types}, words=${words}, simN=${simN}, RE_rsd=${RE_rsd}, CC_rsd=${CC_rsd}, LE_rsd=${LE_rsd})
+	    	}, error = function(e) {
+	    		stop("ParseEval produced an error with the given input parameters. Check the inputs to make sure they are correct.")
+	    	})
+
+			sink()
+
+			write(paste("&lt;br /&gt;Type of Simulation: ", parse[[2]], sep=""), file="${html_file}", append=TRUE)
+			write("&lt;/pre&gt;&lt;br /&gt;", file="${html_file}", append=TRUE)
+
+			write("&lt;a href='simplex_plots.pdf'&gt;Simple Onset Hypothesis Plots&lt;/a&gt;&lt;br /&gt;", file="${html_file}", append=TRUE)
+			write("&lt;a href='complex_plots.pdf'&gt;Complex Onset Hypothesis Plots&lt;/a&gt;", file="${html_file}", append=TRUE)
+
+			p1_s&lt;-xyplot((parse_s*100)~as.factor(anchorindex), groups=edge, type="o", pch=20, cex=0.4, lwd=.5, main="Change in stability pattern as a function of anchor variability", xlab="Anchorindex", ylab="Median RSD (%)", scales=list(x=list(cex=.48)), auto.key=list(space="top", text=c("CC to anchor" , "LE to anchor", "RE to anchor"), points=F, lines=T, columns=2, cex=.7, padding.text=2), data=parse[[3]])
+			p1_c&lt;-xyplot((parse_c*100)~as.factor(anchorindex), groups=edge, type="o", pch=20, cex=0.4, lwd=.5, main="Change in stability pattern as a function of anchor variability", xlab="Anchorindex", ylab="Median RSD (%)", scales=list(x=list(cex=.48)), auto.key=list(space="top", text=c("CC to anchor" , "LE to anchor", "RE to anchor"), points=F, lines=T, columns=2, cex=.7, padding.text=2), data=parse[[3]])
+			p2_s&lt;-xyplot(parse_s~as.factor(anchorindex), type="o", pch=20, lty=1, cex=0.5, main="Best-fitting variability level", xlab="Anchorindex", ylab="Hits (F-Statistics > 98.503)", scales= list(x=list(cex=.48)), data=parse[[4]])
+			p2_c&lt;-xyplot(parse_c~as.factor(anchorindex), type="o", pch=20, lty=1, cex=0.5, main="Best-fitting variability level", xlab="Anchorindex", ylab="Hits (F-Statistics > 98.503)", scales= list(x=list(cex=.48)), data=parse[[4]])
+			rs.3&lt;-xyplot(rs_median~as.factor(anchorindex), panel=function(...) {
+				panel.xyplot(...)
+				panel.abline(h = 1.0, lty = 2, lwd = .5) },
+				type="o", pch=20, cex=0.4, lwd=.5, subset=parse=="simp", main="Median R-squared values across all simulations" , xlab="Anchorindex", ylab=expression("Median"~R^2), scales=list( x=list(cex=.48)), data=parse[[5]][[2]])
+			rs.4&lt;-xyplot(rs_median~as.factor(anchorindex), panel=function(...) {
+				panel.xyplot(...)
+				panel.abline(h = 1.0, lty = 2, lwd = .5) },
+				type="o", pch=20, cex=0.4, lwd=.5, subset=parse=="comp", main="Median R-squared values across all simulations" , xlab="Anchorindex", ylab=expression("Median"~R^2), scales=list( x=list(cex=.48)), data=parse[[5]][[2]])
+
+			pdf(file.path("${html_file.files_path}", "simplex_plots.pdf"))
+			p1_s
+			p2_s
+			rs.3
+			invisible(dev.off())
+
+			pdf(file.path("${html_file.files_path}", "complex_plots.pdf"))
+			p1_c
+			p2_c
+			rs.4
+			invisible(dev.off())
+
+		</configfile>
+	</configfiles>
+
+	<help>
+	<![CDATA[
+
+	ParseEval is a function for assessing certain aspects of articulatory data in phonetic research. It is intended to be used to evaluate the fit between measurements taken from experimental data and measurements taken from simulated data generated under different syllable parses.
+
+	]]>
+
+	</help>
+	<citations>
+		<citation>
+			@inproceedings{Shaw2010,
+abstract = {This paper develops computational tools for evaluating competing syllabic parses of a pho-nological string on the basis of temporal pat-terns in speech production data. This is done by constructing models linking syllable parses to patterns of coordination between articulato-ry events. Data simulated from different syl-labic parses are evaluated against experimental data from American English and Moroccan Arabic, two languages claimed to parse similar strings of segments into different syllabic structures. Results implicate a tautosyllabic parse of initial consonant clusters in English and a heterosyllabic parse of initial clusters in Arabic, in accordance with theoretical work on the syllable structure of these languages. It is further demonstrated that the model can cor-rectly diagnose syllable structure even when previously proposed phonetic heuristics for such structure do not clearly point to the cor-rect diagnosis.},
+author = {Shaw, Jason A and Gafos, Adamantios I},
+booktitle = {Proceedings of the 11th Meeting of the ACL-SIGMORPHON},
+number = {July},
+pages = {54--62},
+publisher = {Association for Computational Linguistics},
+title = {{Quantitative evaluation of competing syllable parses}},
+year = {2010}
+}
+		</citation>
+	</citations>
+
+
+</tool>
