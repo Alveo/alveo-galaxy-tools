@@ -6,7 +6,7 @@
     </requirements>
 
     <command interpreter="python">
-        alveo_api_key.py --api_key $api_key --output_path $output
+        alveo_api_key.py --api_key "$api_key" --output_path $output
     </command>
 
     <inputs>
@@ -19,6 +19,8 @@
 
     <tests>
         <test>
+            <!-- expect this to fail unless you enter a valid API key here and copy it to
+                 the result file -->
             <param name="api_key" value="your api key here" />
             <output name="output" file="api-key.dat" compare="contains" />
         </test>
