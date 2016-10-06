@@ -29,7 +29,6 @@ def main():
     try:
         api_key = open(args.api_key, 'r').read().strip()
         item_lists = get_item_lists(api_key)
-        print(item_lists)
         if item_lists:
             write_table(item_lists, args.output)
     except Exception as e:

@@ -52,9 +52,7 @@
         </test>
     </tests>
 
-    <help>Downloads files from a local list of Alveo items. You can download all files or those matching
-        a wildcard pattern (e.g. *.txt).  Results will be stored as a dataset collection in
-        your history.</help>
+    <help>Downloads files from a local list of Alveo items. You can download all files or those matching a wildcard pattern (e.g. \*.txt).  Results will be stored as a dataset collection in your history.</help>
     <citations>
         <citation type='bibtex'>
             @article{cassidy2014alveo,

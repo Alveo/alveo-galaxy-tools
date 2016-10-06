@@ -2,7 +2,7 @@ categories: [NLP]
 description: Vowel Plots with phonR
 homepage_url: http://alveo.edu.au/
 long_description: Tools to plot vowel formants with the PhonR package
-name: alveoimport
+name: vowelplot
 owner: stevecassidy
 exclude:
     - test.bat

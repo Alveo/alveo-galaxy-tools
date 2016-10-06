@@ -1,12 +1,10 @@
 from __future__ import print_function
 import json
 import argparse
-import pyalveo
 import sys
 import os
 import tgt
 
-API_URL = 'https://app.alveo.edu.au' # TODO: export constants to a separate module
 
 def parser():
     parser = argparse.ArgumentParser(description="Find matching segments in a TextGrid")
@@ -25,7 +23,7 @@ def main():
     assert len(tgfiles) == len(identifiers), "number of textgrids must match number of identifiers"
 
     pairs = zip(tgfiles, identifiers)
-    
+
     rows = []
     for tgfile, identifier in pairs:
         tg = tgt.read_textgrid(tgfile)

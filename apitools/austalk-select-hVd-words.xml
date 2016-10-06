@@ -12,7 +12,7 @@
     <inputs>
         <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
         <param name="speaker" type="text" format="text" label="Speaker ID" help="e.g. 1_123"/>
-        <param name="words" type="select" multiple="false" label="Word List" display="radioboxes">
+        <param name="words" type="select" multiple="false" label="Word List" display="radio">
             <option value='all'>All hVd words</option>
             <option value='monopthongs'>hVd monopthongs</option>
             <option value='dipthongs'>hVd dipthongs</option>
