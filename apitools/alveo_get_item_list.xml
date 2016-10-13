@@ -2,7 +2,7 @@
     <description>Retrieves Item URLs from an Alveo Item List</description>
 
     <requirements>
-        <requirement type="package" version="0.6">pyalveo</requirement>
+        <requirement type="package" version="0.7">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

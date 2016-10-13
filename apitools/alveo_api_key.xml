@@ -2,7 +2,7 @@
     <description>for use with Alveo tools</description>
 
     <requirements>
-        <requirement type="package" version="0.6">pyalveo</requirement>
+        <requirement type="package" version="0.7">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

@@ -31,7 +31,6 @@ def read_item_list(filename, client):
         for row in csvreader:
             itemurls.append(row['ItemURL'])
 
-    print("ITEMS:", itemurls)
     itemlist = pyalveo.ItemGroup(itemurls, client)
 
     return itemlist
