@@ -1,0 +1,35 @@
+<tool id="POSTag" name="Part of Speech Tagging" version="1.0">
+    <description>Part of Speech tagging</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        g_pos.py --input $input1 --output $postags
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt"
+               label="Select a suitable input file from your history"/>
+
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the output to remind you what they contain"
+               value="POS Tags"/>
+    </inputs>
+    <outputs>
+        <data format="json" name="postags" label="${job_name}"/>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name='input1' value='sample_text_tok.json'/>
+            <param name='job_name' value='testpos1'/>
+            <output name='tokens' file='sample_text_pos.json'/>
+        </test>
+    </tests>
+
+    <help>
+        Apply a Part of Speech (POS) tagger to a list of sentences.
+    </help>
+</tool>

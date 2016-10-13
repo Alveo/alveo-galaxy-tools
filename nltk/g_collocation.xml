@@ -1,0 +1,38 @@
+<tool id="Collocation" name="Collocation" version="1.0">
+    <description>Generates a list of the most frequent collocations from an input sequence</description>
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        g_collocation.py --input $input1 --output $tab_file --freq_filter $freq_filter --results $results --coll_type $collocation_type --pos $pos
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a suitable input file from your history"/>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain" value="Collocation"/>
+        <param name="freq_filter" type="integer" label="The minimum number of required occurrences in the corpus"
+               value="0"/>
+        <param name="results" type="integer" label="The maximum number of collocations to show in the results"
+               value="10"/>
+        <param name="collocation_type" type="select" label="" display="radio">
+            <option value="bigram">Bigram Collocations</option>
+            <option value="trigram">Trigram Collocations</option>
+        </param>
+        <param name="pos" type="boolean" label="Data input is a set of POS tags"/>
+    </inputs>
+    <outputs>
+        <data format="tabular" name="tab_file" label="${job_name}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+
+Input is a text, optionally with POS tags. Output is a list of the top N collocations ordered by frequency.
+
+]]>
+
+    </help>
+</tool>

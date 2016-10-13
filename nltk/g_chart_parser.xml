@@ -1,0 +1,28 @@
+<tool id="ChartParser" name="Chart Parser" version="1.0">
+    <description>Parse the sentence using Chart Parser and a supplied grammar</description>
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        g_chart_parser.py --input $input1 --grammar $grammar --output $tab_file
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a suitable input file from your history"/>
+        <param name="grammar" type="data" format="txt" label="Grammar file to use in parsing"/>
+        <param name="job_name" type="text" size="25" label="Supply a name for the outputs to remind you what they contain" value="Chart Parser"/>
+    </inputs>
+    <outputs>
+        <data format="tabular" name="tab_file" label="${job_name}"/>
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+
+Input is sentence segmented text and a suitable grammar. Run the chart parser over the sentence using the grammar. Output is a bracketed parse tree for the sentences.
+
+]]>
+
+    </help>
+</tool>

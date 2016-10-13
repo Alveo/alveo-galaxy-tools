@@ -1,0 +1,31 @@
+<tool id="ReadSents" name="Sentence Segmenter" version="1.0">
+    <description>Segments the text input into separate sentences</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        g_read_sents.py --input $input1 --output $tab_file
+    </command>
+\
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a suitable input file from your history"/>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain" value="Sentence Segmenter"/>
+
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+
+Segment text input into sentences using the Punkt sentence segmenter. Output is one sentence per line.
+
+]]>
+
+    </help>
+</tool>

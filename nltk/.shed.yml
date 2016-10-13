@@ -1,0 +1,6 @@
+categories: [NLP]
+description: nltk based tools
+homepage_url: http://alveo.edu.au/
+long_description: Tools for text processing based on the python NLTK module
+name: nltktools
+owner: stevecassidy

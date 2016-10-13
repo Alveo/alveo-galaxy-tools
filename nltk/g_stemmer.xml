@@ -1,0 +1,36 @@
+<tool id="Stemmer" name="Stemmer" version="1.0">
+    <description>Takes a list of tokens and generates a list of word stems using one of the stemming algorithms</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        g_stemmer.py --input $input1 --output $tab_file --stemmer $stemming_algorithm
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a suitable input file from your history"/>
+        <param name="stemming_algorithm" type="select" label="Select the stemming algorithm to be used">
+            <option value="lancaster">Lancaster Stemmer</option>
+            <option value="porter">Porter Stemmer</option>
+            <option value="snowball">Snowball English Stemmer</option>
+        </param>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain" value="Stemmer"/>
+
+    </inputs>
+    <outputs>
+        <data format="tabular" name="tab_file" label="${job_name}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+
+Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
+
+]]>
+
+    </help>
+</tool>

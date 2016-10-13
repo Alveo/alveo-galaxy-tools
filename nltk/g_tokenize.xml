@@ -1,0 +1,51 @@
+<tool id="Tokenize" name="Tokenize Text" version="1.0">
+    <description>Split a text into words</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        g_tokenize.py --input $input1 --output $tokens $lower $nopunct
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt"
+               label="Select a suitable input file from your history"/>
+
+        <param name='lower' type="boolean" truevalue="--lower" falsevalue=""
+               label="Lowercase all tokens?"/>
+
+        <param name='nopunct' type="boolean" truevalue="--nopunct" falsevalue=""
+               label="Remove punctuation?"/>
+    </inputs>
+    <outputs>
+        <data format="txt" name="tokens" label="${input1.name} Tokens"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name='input1' value='sample_text.txt'/>
+            <param name='lower' value='--lower'/>
+            <param name='nopunct' value='--nopunct'/>
+            <output name='tokens' file='sample_text_lower_nopunct.txt'/>
+        </test>
+        <test>
+            <param name='input1' value='sample_text.txt'/>
+            <param name='lower' value='--lower'/>
+            <param name='nopunct' value=''/>
+            <output name='tokens' file='sample_text_lower.txt'/>
+        </test>
+        <test>
+            <param name='input1' value='sample_text.txt'/>
+            <param name='lower' value=''/>
+            <param name='nopunct' value=''/>
+            <output name='tokens' file='sample_text_tok.txt'/>
+        </test>
+
+    </tests>
+
+    <help>
+        Tokenize a text into separate words, optionally remove punctuation and convert to lower case.
+    </help>
+
+</tool>

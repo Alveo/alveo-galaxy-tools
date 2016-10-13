@@ -1,0 +1,6 @@
+<dependency_resolvers>
+  <tool_shed_packages />
+  <galaxy_packages />
+  <galaxy_packages versionless="true" />
+  <unlinked_tool_shed_packages />
+</dependency_resolvers>

@@ -1,0 +1,34 @@
+<tool id="Frequency" name="Frequency List" version="1.0">
+    <description>Takes a text input and generates a frequency list</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+
+    <command interpreter="python">
+        g_frequency.py --input $input1 --output $frequency_table
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt"
+               label="Select a suitable input file from your history"/>
+
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs to remind you what they contain"
+               value="Frequency List"/>
+    </inputs>
+    <outputs>
+        <data format="tabular" name="frequency_table" label="${job_name}"/>
+    </outputs>
+
+    <tests>
+        <test>
+            <param name='input1' value='sample_text.txt'/>
+            <param name='job_name' value='testfrequency'/>
+            <output name='testfrequency' file='sample_text_frequency.dat'/>
+        </test>
+    </tests>
+    <help>
+        Generate a frequency list from a text ordered by word frequency.
+    </help>
+</tool>
