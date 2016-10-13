@@ -8,5 +8,4 @@ exclude:
     - test.bat
     - test.sh
     - test.tsv
-    - femaletest.tsv
     - .gitignore

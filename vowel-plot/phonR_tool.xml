@@ -3,7 +3,7 @@
 
     <requirements>
         <requirement type="package" version="3.2.1">R</requirement>
-        <requirement type="package" version="1.0.3">phonR</requirement>
+        <requirement type="package" version="1.0_3">r-phonr</requirement>
     </requirements>
 
     <command interpreter="Rscript">
@@ -15,16 +15,16 @@
         <param name="f1" type="data_column" data_ref="input" label="Column for f1" force_select="true" use_header_names="true"/>
         <param name="f2" type="data_column" data_ref="input" label="Column for f2" force_select="true" use_header_names="true"/>
         <param name="vowel" type="data_column" data_ref="input" label="Column with Vowels" force_select="true" use_header_names="true"/>
-        <param name="pretty" type="boolean" label="Make Pretty" 
+        <param name="pretty" type="boolean" label="Make Pretty"
                truevalue="TRUE" falsevalue="FALSE" checked="True"
                help="Will apply various beautification techniques." />
-        <param name="ellipse" type="boolean" label="Add Ellipses" 
+        <param name="ellipse" type="boolean" label="Add Ellipses"
                truevalue="TRUE" falsevalue="FALSE" checked="True"
                help="Will add an ellipse around the location of each vowel cluster." />
-        <param name="tokens" type="boolean" label="Add Tokens" 
+        <param name="tokens" type="boolean" label="Add Tokens"
                truevalue="TRUE" falsevalue="FALSE" checked="True"
                help="Will add tokens to the plot." />
-        <param name="means" type="boolean" label="Add Means" 
+        <param name="means" type="boolean" label="Add Means"
                truevalue="TRUE" falsevalue="FALSE" checked="True"
                help="Will add means to the plot." />
         <param name="cextokens" type="float" label="cex.tokens" value="1.2" min="0.0" max="10.0"
@@ -32,7 +32,7 @@
         <param name="alphatokens" type="float" label="alpha.tokens" value="0.2" min="0.0" max="1.0"
                help="The alpha of the tokens on the plot (transparency). NOTE: Must be a value betweek 0 and 1!" />
         <param name="cexmeans" type="float" label="cex.means" value="2" min="0.0" max="10.0"
-               help="Size of the means on the plot." />  
+               help="Size of the means on the plot." />
     </inputs>
 
     <outputs>
@@ -42,6 +42,15 @@
 
     <tests>
         <test>
+            <param name="input" value="femaletest.tsv"/>
+            <param name="f1" value=4/>
+            <param name="f2" value=5/>
+            <param name="vowel" value="vowel"/>
+            <output name="output">
+                <assert_contents>
+                    <has_text text="html"/>
+                </assert_contents>
+            </output>
         </test>
     </tests>
 
