@@ -4,10 +4,11 @@
     <requirements>
         <requirement type="package" version="3.2.1">R</requirement>
         <requirement type="package" version="1.0_3">r-phonr</requirement>
+        <requirement type="package">r-getopt</requirement>
     </requirements>
 
     <command interpreter="Rscript">
-        $__tool_directory__/phonR_tool.R --input="${input}" --outdir="$htmlfile.files_path" --htmlfile="$htmlfile" --column1="${f1}" --column2="${f2}" --columnvowels="${vowel}" --pretty="${pretty}" --ellipse="${ellipse}" --tokens="${tokens}" --means="${means}" --cextokens="${cextokens}" --alphatokens="${alphatokens}" --cexmeans="${cexmeans}"
+        $__tool_directory__/phonR_tool.R --input="${input}"  --pdffile="$pdffile" --column1="${f1}" --column2="${f2}" --columnvowels="${vowel}" --pretty="${pretty}" --ellipse="${ellipse}" --tokens="${tokens}" --means="${means}" --cextokens="${cextokens}" --alphatokens="${alphatokens}" --cexmeans="${cexmeans}"
     </command>
 
     <inputs>
@@ -36,21 +37,17 @@
     </inputs>
 
     <outputs>
-        <data format="html" name="htmlfile" label="output.html" />
+        <data format="pdf" name="pdffile" label="vowelplot.pdf" />
     </outputs>
 
 
     <tests>
         <test>
             <param name="input" value="femaletest.tsv"/>
-            <param name="f1" value=4/>
-            <param name="f2" value=5/>
-            <param name="vowel" value="vowel"/>
-            <output name="output">
-                <assert_contents>
-                    <has_text text="html"/>
-                </assert_contents>
-            </output>
+            <param name="f1" value='4' />
+            <param name="f2" value='5' />
+            <param name="vowel" value='3'/>
+            <output name="output" file="femalevowelplot.pdf" compare="sim_size" />
         </test>
     </tests>
 
