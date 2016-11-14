@@ -1,0 +1,94 @@
+<tool id="maus_bpf" name="MAUS Align" version="0.01" force_history_refresh="True">
+    <description>from BPF transcription</description>
+
+    <requirements>
+        <container type="docker">stevecassidy/maus</container>
+    </requirements>
+
+    <command>
+        ln -s "${signal}" input.wav &amp;&amp;
+        /home/maus/maus OUTFORMAT=mau LANGUAGE=$language
+        BPF=$bpf INSKANTEXTGRID=$inskantextgrid INSORTTEXTGRID=$insorttextgrid
+        MODUS=$modus MAUSSHIFT=$mausshift MINPAUSLEN=$minpauslen WEIGHT=$weight
+        INSPROB=$insprob NOINITIALFINALSILENCE=$noinitialfinalsilence OUTSYMBOL=$outsymbol
+        OUT=$output SIGNAL=input.wav
+    </command>
+
+    <inputs>
+        <param name="signal" type="data" format="wav" label="Audio File"/>
+        <param name="bpf" type="data" format="par" label="BPF File" help="Orthographic Transcript as BPF"/>
+        <param name="language" type="select" label="Language">
+            <option value="aus">Australian English</option>
+            <option value="sampa">SAMPA</option>
+            <option value="deu">Germa</option>
+            <option value="gsw-CH">Swiss German</option>
+            <option value="eng">British English</option>
+            <option value="fin">Finnish</option>
+            <option value="fra">French</option>
+            <option value="eng-US">US English</option>
+            <option value="nld">Dutch</option>
+            <option value="spa">Spanish</option>
+            <option value="ita">Italian</option>
+            <option value="por">Portugese</option>
+            <option value="hun">Hungarian</option>
+            <option value="ekk">Estonian</option>
+            <option value="pol">Polish</option>
+            <option value="nze">NZ English</option>
+            <option value="kat">Georgian</option>
+            <option value="rus">Russian</option>
+        </param>
+        <param name="insorttextgrid" type="boolean" value="true" label="Add Orthography to TextGrid output"/>
+        <param name="inskantextgrid" type="boolean" value="true" label="Add canonical phonemic transcription to TextGrid output"/>
+        <param name="modus" type="select" label="Mode">
+            <option value="standard">Normal MAUS technique</option>
+            <option value="align">Do not model pronunciation, align the given phonemic transcript</option>
+            <option value="bigram">Use phone recognition constrained by a Bigram model</option>
+        </param>
+        <param name="mausshift" type="integer" value="10" label="Shift found segment boundaries by this many milliseconds"/>
+        <param name="minpauslen" type="integer" label="supress inter-word silence less than n*10ms, ie. enter 5 here to suppress silence less than 50ms" value='5'/>
+        <param name="weight" type="float" value="7.0" label="relative weight given to statistical model, higher values will favour the canonical pronunciation"/>
+        <param name="insprob" type="float" value="0.0" label="Insertion probability - higher values will reduce the probability of deletions of phonemic segments"/>
+        <param name="noinitialfinalsilence" type="select" label="Suppress initial and final silence">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </param>
+        <param name="outsymbol" type="select" label="Output symbols">
+            <option value="sampa">SAMPA</option>
+            <option value="ipa">IPA (utf-8)</option>
+            <option value="manner">IPA manner class</option>
+            <option value="place">IPA place of articulation</option>
+        </param>
+    </inputs>
+
+    <outputs>
+        <data format="TextGrid" name="output" label="TextGrid" />
+    </outputs>
+
+
+    <tests>
+        <test>
+            <param name="signal" type="wav" value="1_1119_2_22_001-ch6-speaker16.wav"/>
+            <param name="bpf" value="1_1119_2_22_001.bpf"/>
+            <param name="language" value="aus"/>
+            <param name="insorttextgrid" value="true" />
+            <param name="inskantextgrid" value="true" />
+            <output name="output" file="1_1119_2_22_001.TextGrid"/>
+        </test>
+    </tests>
+
+    <help>Run the MAUS forced aligner on an audio file given a transcription in BPF format.
+    Output is a TextGrid file containing the phonemic annotation with start/end times for each
+    segment.</help>
+
+    <citations>
+        <citation type='bibtex'>
+            @inproceedings{Buschmeir2013,
+            author = {{Hendrik Buschmeier}, Marcin Wlodarczak},
+            booktitle = {Tagungsband der 24. Konferenz zur Elektronischen Sprachsignalverarbeitung (ESSV 2013)},
+            pages = {152--157},
+            title = {{TextGridTools: A TextGrid Processing and Analysis Toolkit for Python}},
+            year = {2013}
+            }
+        </citation>
+    </citations>
+</tool>
