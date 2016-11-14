@@ -1,4 +1,4 @@
-<tool id="alveo_api_key_storer" name="Store Alveo API Key" version="0.01" force_history_refresh="True">
+<tool id="alveo_api_key_storer" name="Store Alveo API Key" version="0.01">
     <description>for use with Alveo tools</description>
 
     <requirements>
@@ -14,7 +14,7 @@
     </inputs>
 
     <outputs>
-        <data format="txt" name="output" label="Alveo API key" />
+        <data format="auth_token" name="output" label="Alveo API key" />
     </outputs>
 
     <tests>

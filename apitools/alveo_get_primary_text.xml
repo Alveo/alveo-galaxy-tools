@@ -1,4 +1,4 @@
-<tool id="alveo_get_primary_text" name="Get Text from Alveo" version="0.01" force_history_refresh="True">
+<tool id="alveo_get_primary_text" name="Get Text from Alveo" version="0.01">
     <description>Downloads primary text from the items in an Alveo Item List</description>
 
     <requirements>
@@ -10,15 +10,8 @@
     </command>
 
     <inputs>
-        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
-        <param name="import_list" type="data" format="tabular" label="Imported Alveo Item List" help=""/>
-
-        <param name="item_list_url" type="select" label="Alveo Item List" help="The Alveo Item List you wish to import">
-            <options from_dataset="import_list">
-                <column name="name" index="0"/>
-                <column name="value" index="1"/>
-            </options>
-        </param>
+        <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
+        <param name="item_list" type="data" format="item_list" label="Item List" help=""/>
 
         <param name="job_name" type="text" size="25"
                label="Supply a name for the outputs to remind you what they contain" value="Item List downloaded from Alveo"/>

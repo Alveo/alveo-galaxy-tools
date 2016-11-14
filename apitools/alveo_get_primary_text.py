@@ -5,13 +5,15 @@ import pyalveo
 import sys
 import os
 from fnmatch import fnmatch
+import csv
+
 
 API_URL = 'https://app.alveo.edu.au' # TODO: export constants to a separate module
 
 def parser():
     parser = argparse.ArgumentParser(description="Downloads documents in an Alveo Item List")
     parser.add_argument('--api_key', required=True, action="store", type=str, help="Alveo API key")
-    parser.add_argument('--item_list_url', required=True, action="store", type=str, help="Item List to download")
+    parser.add_argument('--item_list', required=True, action="store", type=str, help="File containing list of item URLs")
     parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
     return parser.parse_args()
 
@@ -28,6 +30,7 @@ def galaxy_name(fname, ext):
     fname = FNPAT % {'designation': fname, 'ext': ext}
 
     return fname
+
 import pprint
 def download_documents(item_list, output_path):
     """
@@ -56,13 +59,31 @@ def download_documents(item_list, output_path):
 
     return downloaded
 
+def read_item_list(filename, client):
+    """Read an item list from a file
+    which should be a tabular formatted file
+    with one column header ItemURL.
+    Return an instance of ItemGroup"""
+
+    with open(filename) as fd:
+        csvreader = csv.DictReader(fd, dialect='excel-tab')
+        if 'ItemURL' not in csvreader.fieldnames:
+            return None
+        itemurls = []
+        for row in csvreader:
+            itemurls.append(row['ItemURL'])
+
+    itemlist = pyalveo.ItemGroup(itemurls, client)
+
+    return itemlist
+
 def main():
     args = parser()
     try:
         api_key = open(args.api_key, 'r').read().strip()
-        item_list = get_item_list(api_key, args.item_list_url)
+        client = pyalveo.Client(api_url=API_URL, api_key=api_key, use_cache=False)
+        item_list = read_item_list(args.item_list, client)
         downloaded = download_documents(item_list, args.output_path)
-        # write out a list of downloaded files as a result?
     except pyalveo.APIError as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)

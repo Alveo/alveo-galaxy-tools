@@ -1,4 +1,4 @@
-<tool id="alveo_get_item_list" name="Get Item List from Alveo" version="0.01" force_history_refresh="True">
+<tool id="alveo_get_item_list" name="Get Item URLs for Item List" version="0.01">
     <description>Retrieves Item URLs from an Alveo Item List</description>
 
     <requirements>
@@ -10,7 +10,7 @@
     </command>
 
     <inputs>
-        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
         <param name="import_list" type="data" format="tabular" label="Imported Alveo Item List" help=""/>
 
         <param name="item_list_url" type="select" label="Alveo Item List" help="The Alveo Item List you wish to import">
@@ -25,7 +25,7 @@
     </inputs>
 
     <outputs>
-        <data format="tabular" name="output" label="${job_name}"/>
+        <data format="item_list" name="output" label="${job_name}"/>
     </outputs>
 
     <tests>

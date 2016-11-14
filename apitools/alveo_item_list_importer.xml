@@ -1,5 +1,5 @@
-<tool id="alveo_item_list_importer" name="Get Alveo Item Lists" version="0.01" force_history_refresh="True">
-    <description>Retrieves item list metadata.</description>
+<tool id="alveo_item_list_importer" name="Import Item List Names" version="0.01">
+    <description>Retrieves the list of Item List URLs from Alveo.</description>
 
     <requirements>
         <requirement type="package" version="0.7">pyalveo</requirement>
@@ -11,7 +11,7 @@
 
 
     <inputs>
-        <param name="api_key" type="data" format="txt" label="API Key" help="Your Alveo API key"/>
+        <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
         <param name="job_name" type="text" size="25"
                label="Supply a name for the outputs to remind you what they contain" value="Alveo Item Lists"/>
     </inputs>
@@ -20,8 +20,9 @@
         <data format="tabular" name="item_list" label="${job_name}"/>
     </outputs>
 
-    <help>Import Item Lists from Alveo. This imports the lists, but does not download the individual items.
-        That task is performed by the *Get Files from Alveo* tool.
+    <help>Import Item Lists from Alveo so that you can pass an item list
+    to a subsequent tool.  This only retrieves the list of item list names
+    and URLs that are available to a user, not the item lists themselves.
     </help>
 
     <citations>
