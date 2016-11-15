@@ -1,0 +1,6 @@
+categories: [NLP]
+description: Forced alignment of speech
+homepage_url: http://www.bas.uni-muenchen.de/Bas/BasMAUS.html
+long_description: Tools to align speech signals with transcriptions using the Munich MAUS system
+name: maus
+owner: stevecassidy

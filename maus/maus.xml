@@ -82,12 +82,14 @@
 
     <citations>
         <citation type='bibtex'>
-            @inproceedings{Buschmeir2013,
-            author = {{Hendrik Buschmeier}, Marcin Wlodarczak},
-            booktitle = {Tagungsband der 24. Konferenz zur Elektronischen Sprachsignalverarbeitung (ESSV 2013)},
-            pages = {152--157},
-            title = {{TextGridTools: A TextGrid Processing and Analysis Toolkit for Python}},
-            year = {2013}
+            @inproceedings{Strunk2011,
+            booktitle = {Proceedings of the Ninth International Conference on Language Resources and Evaluation},
+            publisher = {European Language Resources Association (ELRA)},
+            isbn = {978-2-9517408-8-4},
+            keywords = {forced alignment,language documentation corpora,word times},
+            title = {{Untrained Forced Alignment of Transcriptions and Audio for Language Documentation Corpora using WebMAUS}},
+            url = {http://www.bas.uni-muenchen.de/forschung/publikationen/Schiel-LREC2014.pdf},
+            year = {2014}
             }
         </citation>
     </citations>

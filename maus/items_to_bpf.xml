@@ -1,0 +1,25 @@
+<tool id="items_to_bpf" name="Item List to BPF" version="0.01" force_history_refresh="True">
+    <description></description>
+
+    <command interpreter="python">
+        items_to_bpf.py --lexicon ${lexicon} --item_list ${item_list} --output_path BPFData
+    </command>
+
+    <inputs>
+        <param name="item_list" type="data" format="item_list" label="Item List" help=""/>
+        <param name="lexicon" type="data" format="tabular" label="Lexicon" help=""/>
+
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the output to remind you what it contains" value="BPF Files"/>
+    </inputs>
+
+    <outputs>
+        <collection type="list" label="$job_name" name="output1">
+            <discover_datasets pattern="(?P&lt;designation&gt;[^#]+)#(?P&lt;ext&gt;.+)" directory="BPFData"/>
+        </collection>
+    </outputs>
+
+    <help>Generate a collection of BPF annotation files from an item list
+    that contains the item orthography, these are then suitable for input
+    to the MAUS forced alignment system.</help>
+</tool>
