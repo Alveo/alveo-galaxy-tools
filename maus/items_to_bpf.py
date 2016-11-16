@@ -1,10 +1,6 @@
 from __future__ import print_function
-import json
 import argparse
-import pyalveo
-import sys
 import os
-from fnmatch import fnmatch
 import csv
 import re
 
