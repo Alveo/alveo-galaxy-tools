@@ -20,7 +20,6 @@ def read_item_list(filename):
 
     with open(filename) as fd:
         csvreader = csv.DictReader(fd, dialect='excel-tab')
-        print("CSV", csvreader.fieldnames)
         if 'ItemURL' not in csvreader.fieldnames:
             return None
         if 'Prompt' not in csvreader.fieldnames:

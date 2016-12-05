@@ -31,7 +31,7 @@ class WAV( Binary ):
 Binary.register_sniffable_binary_format('wav', 'wav', WAV)
 
 class TextGrid( Text ):
-    """Praat Textgrid file"""
+    """Praat Textgrid file for speech annotations"""
 
     file_ext = "TextGrid"
     header = 'File type = "ooTextFile"\nObject class = "TextGrid"'

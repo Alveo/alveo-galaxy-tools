@@ -7,7 +7,7 @@
 
     <command>
         ln -s "${signal}" input.wav &amp;&amp;
-        /home/maus/maus OUTFORMAT=mau LANGUAGE=$language
+        /home/maus/maus OUTFORMAT=TextGrid LANGUAGE=$language
         BPF=$bpf INSKANTEXTGRID=$inskantextgrid INSORTTEXTGRID=$insorttextgrid
         MODUS=$modus MAUSSHIFT=$mausshift MINPAUSLEN=$minpauslen WEIGHT=$weight
         INSPROB=$insprob NOINITIALFINALSILENCE=$noinitialfinalsilence OUTSYMBOL=$outsymbol
@@ -68,7 +68,7 @@
     <tests>
         <test>
             <param name="signal" type="wav" value="1_1119_2_22_001-ch6-speaker16.wav"/>
-            <param name="bpf" value="1_1119_2_22_001.bpf"/>
+            <param name="bpf" value="1_1119_2_22_001.par"/>
             <param name="language" value="aus"/>
             <param name="insorttextgrid" value="true" />
             <param name="inskantextgrid" value="true" />
