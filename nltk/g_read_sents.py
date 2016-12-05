@@ -13,15 +13,14 @@ def Parser():
     return args
 
 def print_out(outp, text, sentences):
-    o = open(outp, 'w')
-    curr = 0
-    for sent in sentences:
-        times = count_occurences(sent, sent[-1])
-        curr = text.find(sent[0], curr)
-        end = find_nth(text, sent[-1], times, curr) + len(sent[-1])
-        o.write(text[curr:end] + '\n')
-        curr = end
-    o.close()
+    with open(outp, 'w') as output:
+        curr = 0
+        for sent in sentences:
+            times = count_occurences(sent, sent[-1])
+            curr = text.find(sent[0], curr)
+            end = find_nth(text, sent[-1], times, curr) + len(sent[-1])
+            output.write(text[curr:end] + '\n')
+            curr = end
 
 def find_nth(string, sub, n, offset):
     start = string.find(sub, offset)
@@ -38,7 +37,8 @@ def count_occurences(lst, string):
     return count
 
 def read_sents(inp, outp):
-    i = open(inp, 'r').read()
+    with open(inp, 'r') as fd:
+        i = fd.read()
     corpus = PlaintextCorpusReader(os.path.dirname(inp), os.path.basename(inp))
     sents = corpus.sents()
     print_out(outp, i, sents)

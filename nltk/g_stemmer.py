@@ -14,17 +14,18 @@ def arguments():
     return args
 
 def stem_file(in_file, out_file, stemmer_type):
-    unsegmented = unicode(open(in_file, 'r').read(), errors='ignore')
-    output = open(out_file, 'w')
-    sentences = nltk.sent_tokenize(unsegmented)
-    stemmer = get_stemmer(stemmer_type)
-    for sentence in sentences:
-        words = nltk.word_tokenize(sentence)
-        for word in words:
-            stemmed_word = stemmer.stem(word)
-            output.write(stemmed_word)
-            output.write('\n')
-    output.close()
+    with open(in_file, 'r') as fd:
+        unsegmented = fd.read()
+
+    with open(out_file, 'w') as output:
+        sentences = nltk.sent_tokenize(unsegmented)
+        stemmer = get_stemmer(stemmer_type)
+        for sentence in sentences:
+            words = nltk.word_tokenize(sentence)
+            for word in words:
+                stemmed_word = stemmer.stem(word)
+                output.write(stemmed_word)
+                output.write('\n')
 
 def get_stemmer(stemmer_type):
     if stemmer_type == 'lancaster':

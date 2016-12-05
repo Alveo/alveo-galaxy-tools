@@ -13,20 +13,26 @@ def arguments():
 
 
 def chart_parse(in_file, grammar_file, out_file):
-    text = unicode(open(in_file, 'r').read(), errors='ignore')
-    output = open(out_file, 'w')
-    grammar_string = unicode(open(grammar_file, 'r').read(), errors='ignore')
+    with open(in_file, 'r') as fd:
+        text = fd.read()
+
+    with open(grammar_file, 'r') as fd:
+        grammar_string = fd.read()
+
     try:
-        grammar = nltk.parse_cfg(grammar_string)
+        grammar = nltk.CFG.fromstring(grammar_string)
         parser = nltk.ChartParser(grammar)
         sentences = nltk.sent_tokenize(text)
-        for sentence in sentences:
-            words = nltk.word_tokenize(sentence)
-            tree = parser.parse(words)
-            output.write(tree.pprint())
-            output.write('\n')
-    except Exception, e:
-        message = "Error with parsing. Check the input files are correct and the grammar contains every word in the input sequence. \n----\n" + str(e)
+        with open(out_file, 'w') as output:
+            for sentence in sentences:
+                words = nltk.word_tokenize(sentence)
+                trees = parser.parse(words)
+                for t in trees:
+                    output.write(t.pformat())
+                    output.write('\n')
+
+    except Exception as e:
+        message = "Error with parsing. Check the input files are correct and the grammar contains every word in the input sequence. \n----\n" + str(e) + "\n"
         sys.stderr.write(message)
         sys.exit()
     output.close()
@@ -34,5 +40,3 @@ def chart_parse(in_file, grammar_file, out_file):
 if __name__ == '__main__':
     args = arguments()
     chart_parse(args.input, args.grammar, args.output)
-
-

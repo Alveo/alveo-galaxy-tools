@@ -18,8 +18,9 @@ def Parser():
 
 def collocation(inp, outp, freq_filter, results, coll_type, pos):
     pos = bool(pos == 'true')
-    i = str(unicode(open(inp, 'r').read(), errors='ignore'))
-    o = open(outp, 'w')
+    with open(inp, 'r') as fd:
+        i = fd.read()
+
     all_words = []
     if pos:
         text = i.split(' ')[:-1]
@@ -37,10 +38,10 @@ def collocation(inp, outp, freq_filter, results, coll_type, pos):
         finder = TrigramCollocationFinder.from_words(all_words)
     finder.apply_freq_filter(int(freq_filter))
     colls = finder.nbest(measures.pmi, int(results))
-    for coll in colls:
-        o.write("%s\t%s" % coll)
-        o.write('\n')
-    o.close()
+    with  open(outp, 'w') as output:
+        for coll in colls:
+            output.write("%s\t%s" % coll)
+            output.write('\n')
 
 if __name__ == '__main__':
     args = Parser()

@@ -18,23 +18,24 @@ def strip_punct(text):
 
 
 def tokenize(in_file, out_file, lower=False, nopunct=False):
-    text = open(in_file, 'r').read()
+    with open(in_file, 'r') as fd:
+        text = fd.read()
+
     if lower:
         text = text.lower()
     if nopunct:
         text = strip_punct(text)
     result = []
-    text = unicode(text, errors='ignore')
+    #text = unicode(text, errors='ignore')
     sentences = nltk.sent_tokenize(text)
     for sentence in sentences:
         tokens = nltk.word_tokenize(sentence)
         result.append(tokens)
-    output = open(out_file, 'w')
-    # write one token per line
-    for sentence in result:
-        for token in sentence:
-            output.write(token + "\n")
-    output.close()
+    with open(out_file, 'w') as output:
+        # write one token per line
+        for sentence in result:
+            for token in sentence:
+                output.write(token + "\n")
 
 
 if __name__ == '__main__':
