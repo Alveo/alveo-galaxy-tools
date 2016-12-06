@@ -1,6 +1,6 @@
 #!/bin/sh
 
-### Run R providing the R script in $1 as standard input and passing 
+### Run R providing the R script in $1 as standard input and passing
 ### the remaining arguments on the command line
 
 # Function that writes a message to stderr and exits
@@ -11,7 +11,9 @@ fail()
 }
 
 # Ensure R executable is found
-which R > /dev/null || fail "'R' is required by this tool but was not found on path" 
+which R > /dev/null || fail "'R' is required by this tool but was not found on path"
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Extract first argument
 infile=$1; shift
@@ -20,4 +22,5 @@ infile=$1; shift
 test -f $infile || fail "R input file '$infile' does not exist"
 
 # Invoke R passing file named by first argument to stdin
-R --vanilla --slave $* < $infile
+# add in the util.R file too containing common functions
+cat $DIR/util.R $infile | R --vanilla --slave $*

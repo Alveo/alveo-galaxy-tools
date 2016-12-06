@@ -1,0 +1,87 @@
+<tool id="g_forest" name="Get Formants" version="0.01">
+    <description>using wrassp formant tracker</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">R</requirement>
+        <requirement type="package" version="0.1.4">r-wrassp</requirement>
+    </requirements>
+
+    <command interpreter="bash">
+        r_wrapper.sh $__tool_directory__/g_forest.R --args ${wavfile} ${output}
+        ${beginTime} ${endTime} ${windowShift} ${windowSize} ${effectiveLength}
+        ${nominalF1} ${gender} ${estimate} ${order} ${incrOrder} ${numFormants}
+        ${window} ${preemphasis}
+     </command>
+
+
+    <inputs>
+        <param name="wavfile" type="data" format="wav" label="Audio File" help="Audio file in WAV format"/>
+        <param name="beginTime" type="integer" value="0" label="Start time for analysis (s)"/>
+        <param name="endTime" type="integer" value="0" label="End Time for analysis (s) 0 means end of signal"/>
+        <param name="windowShift" type="integer" value="5" label="Window Shift (ms)" help="set analysis window shift to dur ms"/>
+        <param name="windowSize" type="integer" value="20" label="Window Size (ms)" help="set analysis window size to dur ms"/>
+        <param name="effectiveLength" type="select" label="make window size effective rather than exact">
+            <option value="1" selected="true">Yes</option>
+            <option value="0">No</option>
+        </param>
+        <param name="nominalF1" type="integer" value="500" label="Nominal F1 Frequency (Hz)"/>
+        <param name="gender" type="select" label="Speaker Gender">
+            <option value="m" selected="true">Male</option>
+            <option value="f">Female</option>
+            <option value="u">Unknown</option>
+        </param>
+        <param name="estimate" type="select" label="Insert rough frequency estimates of missing formants (default: frequency set to zero)">
+            <option value="1">Yes</option>
+            <option value="0" selected="true">No</option>
+        </param>
+        <param name="order" type="integer" value="0" label="analysis order (default 0 means automatic)"/>
+        <param name="incrOrder" type="integer" value="0" label="increment/decrement analysis order"/>
+        <param name="numFormants" type="integer" value="4" label="Number of formants"/>
+        <param name="window" type="select">
+            <option value="BLACKMAN" selected="true">Blackman</option>
+            <option value="RECTANGLE">rectangle</option>
+            <option value="PARABOLA">parabola/Riesz/Welch</option>
+            <option value="COS"      >cosine</option>
+            <option value="HANN"     >Hann/hanning/cosine^2</option>
+            <option value="COS_4"    >cosine^4</option>
+            <option value="HAMMING"  >Hamming</option>
+            <option value="BLACK_X"  >exact Blackman</option>
+            <option value="BLACK_M3" >min. 3-term Blackman-Nuttal</option>
+            <option value="BLACK_M4" >min. 4-term Blackman-Nuttal</option>
+            <option value="NUTTAL_3" >3-term Nuttal (-18 dB/oct)</option>
+            <option value="NUTTAL_4" >4-term Nuttal (-18 dB/oct)</option>
+            <option value="KAISER2_0">Kaiser-Bessel (alpha = 2.0)</option>
+            <option value="KAISER3_0">Kaiser-Bessel (alpha = 3.0)</option>
+            <option value="KAISER4_0">Kaiser-Bessel (alpha = 4.0)</option>
+        </param>
+        <param name="preemphasis" type="float" value="-0.8" min="-1" max="0" label="Pre-emphasis"/>
+    </inputs>
+
+    <outputs>
+        <data name="output" format="tabular" label="${wavfile.element_identifier}" />
+    </outputs>
+
+
+    <tests>
+        <test>
+            <param name="wavfile" value="1_1119_2_22_001-ch6-speaker16.wav"/>
+            <output name="output" file="1_1119_2_22_001-formants.dat"/>
+        </test>
+    </tests>
+
+    <help>Calculate the formant tracks for segments of an audio file.
+ Raw resonance frequency and bandwidth values are obtained by root-solving of the Linear Prediction polynomial from the autocorrelation method and the Split-Levinson-Algorithm (SLA). Resonances are then classified as formants using the so-called Pisarenko frequencies (by-product of the SLA) and a formant frequeny range table derived from the nominal F1 frequency. The latter may have to be increased by about 12% for female voices (see NominalF1 and Gender options).
+    </help>
+
+    <citations>
+        <citation type='bibtex'>
+            @Manual{,
+              title = {wrassp: an R wrapper to the ASSP Library},
+              author = {Lasse Bombien and Raphael Winkelmann and Michel
+                Scheffers},
+              year = {2016},
+              note = {R package version 0.1.4},
+            }
+        </citation>
+    </citations>
+</tool>
