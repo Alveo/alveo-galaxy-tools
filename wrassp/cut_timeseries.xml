@@ -1,0 +1,33 @@
+<tool id="cut_timeseries" name="Cut data from a timeseries" version="0.1">
+    <description></description>
+
+    <command interpreter="python">
+        cut_timeseries.py --timeseries "${",".join(map(str, $timeseries))}" --identifier "${",".join(map(str, [t.element_identifier for t in $timeseries]))}" --cutat ${cutat} --segment_list '${segment_list}' --output_path '$output'
+    </command>
+
+    <inputs>
+        <param name="timeseries" type="data" multiple="true" format="tabular" label="Time Series"/>
+        <param name="cutat" type="float" label="Cut point (0-1)" value="0.5"/>
+        <param name="segment_list" type="data" format="tabular" label="Segment List"/>
+    </inputs>
+    <outputs>
+        <data format="tabular" name="output"/>
+    </outputs>
+    <tests>
+        <test>
+            <param name="cutat" value="0.5"/>
+            <param name="timeseries" value="1_1119_2_22_001-formants.dat"/>
+            <param name="segment_list" value="segmentlist.dat"/>
+            <output name="output">
+                <assert_contents>
+                    <has_text text="sampletime"/>
+                    <has_text text="@"/>
+                    <has_text text="1_1119_2_22_001"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+    ]]></help>
+</tool>

@@ -71,7 +71,11 @@ WHERE {
     with open(output, 'w') as out:
         out.write("Speaker\tPrompt\tItemURL\n")
         for item in items:
-            out.write(speakerid + "\t" + item[0] + "\t" + item[1] + "\n")
+            # TODO: fix this once the RDF data is fixed in alveo
+            # need to modify the item URL
+            itemurl = item[1].replace('http://id.austalk.edu.au/item/', 'https://app.alveo.edu.au/catalog/austalk/')
+            
+            out.write(speakerid + "\t" + item[0] + "\t" + itemurl + "\n")
 
 
 def main():
