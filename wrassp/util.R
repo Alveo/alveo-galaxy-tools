@@ -10,8 +10,8 @@ assp_to_tsv <- function(assp, outfile) {
     # add a column of timestamps
     start <- attr(assp, 'startTime')
     rate <- attr(assp, 'sampleRate')
-    sampletime <- seq(start, by=1/rate, length.out=nrow(result))
-    result <- cbind(sampletime, result)
+    time <- seq(start, by=1/rate, length.out=nrow(result))
+    result <- cbind(time, result)
 
     write.table(result, file=outfile, sep="\t", quote=F, row.names=F, col.names=T, append=F)
 }

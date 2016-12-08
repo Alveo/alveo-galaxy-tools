@@ -61,7 +61,7 @@
     </inputs>
 
     <outputs>
-        <data format="TextGrid" name="output" label="TextGrid" />
+        <data name="output" format="TextGrid" label="#echo $signal.element_identifier.replace('.wav', '.TextGrid') #" />
     </outputs>
 
 

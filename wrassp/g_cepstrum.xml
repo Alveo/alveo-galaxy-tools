@@ -1,5 +1,5 @@
-<tool id="g_forest" name="Get Formants" version="0.01">
-    <description>using wrassp formant tracker</description>
+<tool id="g_cepstrum" name="Compute Cepstrum" version="0.01">
+    <description>using wrassp</description>
 
     <requirements>
         <requirement type="package" version="3.2.1">R</requirement>
@@ -40,7 +40,7 @@
     </inputs>
 
     <outputs>
-        <data name="output" format="tabular" label="${wavfile.element_identifier}" />
+        <data name="output" format="tabular" label="#echo $wavfile.element_identifier.replace('wav', 'cep') #" />
     </outputs>
 
 
