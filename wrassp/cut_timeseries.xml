@@ -20,7 +20,7 @@
             <param name="segment_list" value="segmentlist.dat"/>
             <output name="output">
                 <assert_contents>
-                    <has_text text="sampletime"/>
+                    <has_text text="time"/>
                     <has_text text="@"/>
                     <has_text text="1_1119_2_22_001"/>
                 </assert_contents>

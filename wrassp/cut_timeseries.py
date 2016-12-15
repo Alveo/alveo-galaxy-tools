@@ -68,7 +68,7 @@ def cut(tsfiles, segfile, cutpoint):
         with open(tsfile, 'r') as fd:
             reader = csv.reader(fd, dialect=csv.excel_tab)
             for row in reader:
-                if row[0] == 'sampletime':
+                if row[0] == 'time':
                     tsheader = row
                 elif float(row[0]) > start and float(row[0]) < end:
                     collect.append(row)

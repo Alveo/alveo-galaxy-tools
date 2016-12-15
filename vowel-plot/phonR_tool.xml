@@ -2,7 +2,6 @@
     <description>Using phonR to produce a Vowel Plot</description>
 
     <requirements>
-        <requirement type="package" version="3.2.1">R</requirement>
         <requirement type="package" version="1.0_3">r-phonr</requirement>
         <requirement type="package">r-getopt</requirement>
     </requirements>
@@ -10,6 +9,13 @@
     <command interpreter="Rscript">
         $__tool_directory__/phonR_tool.R --input="${input}"  --pdffile="$pdffile" --column1="${f1}" --column2="${f2}" --columnvowels="${vowel}" --pretty="${pretty}" --ellipse="${ellipse}" --tokens="${tokens}" --means="${means}" --cextokens="${cextokens}" --alphatokens="${alphatokens}" --cexmeans="${cexmeans}"
     </command>
+    
+    <stdio>
+      <regex match="Linux: unexpected operator"
+             source="stderr"
+             level="warning"
+             description="conda r-base bash bug" />
+    </stdio>
 
     <inputs>
         <param name="input" type="data" format="tabular" label="Segment List" help=""/>

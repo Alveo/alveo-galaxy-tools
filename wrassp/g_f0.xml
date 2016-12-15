@@ -2,7 +2,6 @@
     <description>using wrassp ksvF0 pitch tracker</description>
 
     <requirements>
-        <requirement type="package" version="3.2.1">R</requirement>
         <requirement type="package" version="0.1.4">r-wrassp</requirement>
     </requirements>
 
@@ -11,6 +10,12 @@
         ${beginTime} ${endTime} ${windowShift} ${gender} ${maxF} ${minF} ${minAmp} ${maxZCR}
      </command>
 
+     <stdio>
+         <regex match="Linux: unexpected operator"
+                source="stderr"
+                level="warning"
+                description="conda r-base bash bug" />
+     </stdio>
 
     <inputs>
         <param name="wavfile" type="data" format="wav" label="Audio File" help="Audio file in WAV format"/>
