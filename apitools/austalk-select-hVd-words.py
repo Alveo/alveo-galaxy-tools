@@ -47,8 +47,8 @@ WHERE {
  """ % speakerid
 
     hVdWords = {
-        'monopthongs': ['head', 'had', 'hud', 'heed', 'hid', 'hood', 'hod', "whod"],
-        'dipthongs': ['herd', 'howd', 'hoyd', 'haired', 'hard', 'heared']
+        'monopthongs': ['head', 'had', 'hud', 'heed', 'hid', 'hood', 'hod', 'whod', 'herd', 'haired', 'hard', 'horde'],
+        'dipthongs': ['howd', 'hoyd', 'hide', 'hode', 'hade', 'heared'] 
         }
 
     if words == 'all':
@@ -74,7 +74,7 @@ WHERE {
             # TODO: fix this once the RDF data is fixed in alveo
             # need to modify the item URL
             itemurl = item[1].replace('http://id.austalk.edu.au/item/', 'https://app.alveo.edu.au/catalog/austalk/')
-            
+
             out.write(speakerid + "\t" + item[0] + "\t" + itemurl + "\n")
 
 
