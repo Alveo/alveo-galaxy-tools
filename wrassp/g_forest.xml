@@ -1,4 +1,4 @@
-<tool id="g_forest" name="Get Formants" version="0.01">
+<tool id="g_forest" name="Compute Formants" version="0.01">
     <description>using wrassp formant tracker</description>
 
     <requirements>

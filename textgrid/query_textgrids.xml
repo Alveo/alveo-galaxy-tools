@@ -10,7 +10,7 @@
     </command>
 
     <inputs>
-        <param name="textgrid" type="data" multiple="true" format="TextGrid" label="TextGrid" help="The TextGrid file"/>
+        <param name="textgrid" type="data" multiple="true" format="textgrid" label="TextGrid" help="The TextGrid file"/>
         <param name="tier" type="text" label="Tier name" help="e.g MAU, ORT"/>
         <param name="regex" type="text" label="Regular Expressoion to match segments">
             <sanitizer>

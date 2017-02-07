@@ -94,7 +94,7 @@ if __name__=='__main__':
     headers,rows = cut(zip(tsidents, tsfiles), args.segment_list, args.cutat)
 
     with open(args.output_path, 'w') as out:
-        writer = csv.writer(out)
+        writer = csv.writer(out, dialect=csv.excel_tab)
         writer.writerow(headers)
         for row in rows:
             writer.writerow(row)

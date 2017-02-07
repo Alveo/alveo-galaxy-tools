@@ -1,4 +1,4 @@
-<tool id="g_f0" name="Get Pitch" version="0.01">
+<tool id="g_f0" name="Compute Pitch" version="0.01">
     <description>using wrassp ksvF0 pitch tracker</description>
 
     <requirements>

@@ -28,6 +28,15 @@
         </test>
     </tests>
     <help><![CDATA[
+Given a segment list (tabular data containing colums for start, end and identifier)
+and a dataset collection containing timeseries data in tsv format (must include
+a time column containing timestamps for each row) this tool extracts data at
+the time-point given in the segment list from the corresponding data file. The
+result is a tsv file containing rows from the datasets at the corresponding time.
 
+Segment list will be, for example, the result of the Search Textgrid tool.
+
+The data will be, for example, the result of running the Compute Formants tool over
+a collection of audio files.
     ]]></help>
 </tool>
