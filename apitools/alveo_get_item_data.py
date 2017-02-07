@@ -46,7 +46,7 @@ def galaxy_name(itemname, fname):
 
     root, ext = os.path.splitext(fname)
     ext = ext[1:] # remove initial .
-    fname = FNPAT % {'designation': fname, 'ext': ext}
+    fname = FNPAT % {'designation': root, 'ext': ext}
 
     return fname
 
