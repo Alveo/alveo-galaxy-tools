@@ -1,4 +1,4 @@
-
+GALAXY_DIST=/Users/steve/projects/third-party/galaxy
 PLANEMO = planemo
 TOOLSHED = testtoolshed
 
@@ -20,4 +20,13 @@ upload-vowel-plot:
 upload-wrassp:
 	$(PLANEMO) shed_update --force_repository_creation --check_diff -t $(TOOLSHED) wrassp
 
-upload: upload-apitools upload-nltk upload-parse_eval upload-textgrid upload-vowel-plot wrassp
+upload-maus:
+	$(PLANEMO) shed_update --force_repository_creation --check_diff -t $(TOOLSHED) maus
+
+
+upload: upload-apitools upload-nltk upload-parse_eval upload-textgrid upload-vowel-plot upload-wrassp upload-maus
+
+
+datatypes:
+	ln -s datatypes/alveo.py $(GALAXY_DIST)/lib/galaxy/datatypes/
+	ln -s datatypes/datatypes_conf.xml $(GALAXY_DIST)/lib/galaxy/config/
