@@ -4,3 +4,4 @@ homepage_url: http://alveo.edu.au/
 long_description: Quantitative Evaluation of Competing Syllable Parses
 name: parseeval
 owner: stevecassidy
+remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools

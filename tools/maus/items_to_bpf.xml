@@ -1,4 +1,4 @@
-<tool id="items_to_bpf" name="Item List to BPF" version="0.01" force_history_refresh="True">
+<tool id="items_to_bpf" name="Item List to BPF" version="0.01">
     <description></description>
 
     <command interpreter="python">

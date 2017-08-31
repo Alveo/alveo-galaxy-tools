@@ -4,11 +4,11 @@
     <requirements>
         <requirement type="package" version="3.2.1">nltk</requirement>
     </requirements>
-    
+
     <command interpreter="python">
         g_read_sents.py --input $input1 --output $tab_file
     </command>
-\
+
     <inputs>
         <param name="input1" type="data" format="txt" label="Select a suitable input file from your history"/>
         <param name="job_name" type="text" size="25"

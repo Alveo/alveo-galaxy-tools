@@ -1,4 +1,4 @@
-<tool id="query_textgrids" name="Search TextGrid" version="0.01" force_history_refresh="True">
+<tool id="query_textgrids" name="Search TextGrid" version="0.01">
     <description>to find matching segments</description>
 
     <requirements>

@@ -9,3 +9,4 @@ exclude:
     - test.sh
     - test.tsv
     - .gitignore
+remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools

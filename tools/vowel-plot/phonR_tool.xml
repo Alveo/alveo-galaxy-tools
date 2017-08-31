@@ -1,4 +1,4 @@
-<tool id="vowel_plot" name="Plot Vowels" version="0.01" force_history_refresh="True">
+<tool id="vowel_plot" name="Plot Vowels" version="0.01">
     <description>Using phonR to produce a Vowel Plot</description>
 
     <requirements>
@@ -6,16 +6,16 @@
         <requirement type="package">r-getopt</requirement>
     </requirements>
 
+    <stdio>
+        <regex match="Linux: unexpected operator"
+               source="stderr"
+               level="warning"
+               description="conda r-base bash bug" />
+    </stdio>
+
     <command interpreter="Rscript">
         $__tool_directory__/phonR_tool.R --input="${input}"  --pdffile="$pdffile" --column1="${f1}" --column2="${f2}" --columnvowels="${vowel}" --pretty="${pretty}" --ellipse="${ellipse}" --tokens="${tokens}" --means="${means}" --cextokens="${cextokens}" --alphatokens="${alphatokens}" --cexmeans="${cexmeans}"
     </command>
-    
-    <stdio>
-      <regex match="Linux: unexpected operator"
-             source="stderr"
-             level="warning"
-             description="conda r-base bash bug" />
-    </stdio>
 
     <inputs>
         <param name="input" type="data" format="tabular" label="Segment List" help=""/>
@@ -53,7 +53,7 @@
             <param name="f1" value='4' />
             <param name="f2" value='5' />
             <param name="vowel" value='3'/>
-            <output name="output" file="femalevowelplot.pdf" compare="sim_size" />
+            <output name="pdffile" file="femalevowelplot.pdf" compare="sim_size" />
         </test>
     </tests>
 

@@ -1,4 +1,4 @@
-<tool id="maus_bpf" name="MAUS Align" version="0.01" force_history_refresh="True">
+<tool id="maus_bpf" name="MAUS Align" version="0.01">
     <description>from BPF transcription</description>
 
     <requirements>
@@ -67,7 +67,7 @@
 
     <tests>
         <test>
-            <param name="signal" type="wav" value="1_1119_2_22_001-ch6-speaker16.wav"/>
+            <param name="signal" value="1_1119_2_22_001-ch6-speaker16.wav"/>
             <param name="bpf" value="1_1119_2_22_001.par"/>
             <param name="language" value="aus"/>
             <param name="insorttextgrid" value="true" />

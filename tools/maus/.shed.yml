@@ -4,3 +4,4 @@ homepage_url: http://www.bas.uni-muenchen.de/Bas/BasMAUS.html
 long_description: Tools to align speech signals with transcriptions using the Munich MAUS system
 name: maus
 owner: stevecassidy
+remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools

@@ -1,5 +1,6 @@
 categories: [Data Source]
 description: alveo import
+remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools
 homepage_url: http://alveo.edu.au/
 long_description: Tools to import data from the Alveo VL
 name: alveoimport
