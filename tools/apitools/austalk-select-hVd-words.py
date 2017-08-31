@@ -22,13 +22,16 @@ PREFIX is: <http://purl.org/ontology/is/core#>
 PREFIX iso: <http://purl.org/iso25964/skos-thes#>
 PREFIX dada: <http://purl.org/dada/schema/0.2#>"""
 
+
 def parser():
     parser = argparse.ArgumentParser(description="Retrieves Alveo Item Lists")
     parser.add_argument('--api_key', required=True, action="store", type=str, help="Alveo API key")
     parser.add_argument('--speaker', required=True, action="store", type=str, help="Speaker identifier")
-    parser.add_argument('--words', required=False, default='all', action="store", type=str, help="Word group (all, monopthongs, dipthongs)")
+    parser.add_argument('--words', required=False, default='all', action="store", type=str,
+                        help="Word group (all, monopthongs, dipthongs)")
     parser.add_argument('--output', required=True, action="store", type=str, help="output file name")
     return parser.parse_args()
+
 
 def find_hVd_words(api_key, speakerid, output, words='all'):
     """Find words in the Austalk corpus
@@ -46,10 +49,9 @@ WHERE {
   ?item austalk:componentName ?compname .
  """ % speakerid
 
-    hVdWords = {
-        'monopthongs': ['head', 'had', 'hud', 'heed', 'hid', 'hood', 'hod', 'whod', 'herd', 'haired', 'hard', 'horde'],
-        'dipthongs': ['howd', 'hoyd', 'hide', 'hode', 'hade', 'heared'] 
-        }
+    hVdWords = dict(monopthongs=['head', 'had', 'hud', 'heed', 'hid', 'hood', 'hod',
+                                 'whod', 'herd', 'haired', 'hard', 'horde'],
+                    dipthongs=['howd', 'hoyd', 'hide', 'hode', 'hade', 'heared'])
 
     if words == 'all':
         words = hVdWords['monopthongs'] + hVdWords['dipthongs']
@@ -86,6 +88,7 @@ def main():
     except Exception as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

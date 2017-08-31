@@ -12,6 +12,7 @@ def parser():
     parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
     return parser.parse_args()
 
+
 def read_item_list(filename):
     """Read an item list from a file
     which should be a tabular formatted file
@@ -30,8 +31,10 @@ def read_item_list(filename):
 
     return itemurls
 
+
 # this file name pattern allows galaxy to discover the dataset designation and type
 FNPAT = "%(designation)s#%(ext)s"
+
 
 def galaxy_name(itemurl, ext):
     """Construct a filename suitable for dataset discovery
@@ -77,8 +80,7 @@ def build_bpf(ortho_trans, lexicon):
             ort.append("ORT: %d %s" % (n, word))
             kan.append("KAN: %d %s" % (n, lexicon[word]))
         except KeyError:
-            raise IncompleteLexiconError("'" + word +
-                                         "' not present in lexicon")
+            raise Exception("'" + word + "' not present in lexicon")
 
     nl = u"\n"
     return nl.join(ort) + nl + nl.join(kan)

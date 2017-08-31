@@ -1,5 +1,4 @@
 from __future__ import print_function
-import json
 import argparse
 import pyalveo
 import sys
@@ -7,7 +6,8 @@ import os
 from fnmatch import fnmatch
 import csv
 
-API_URL = 'https://app.alveo.edu.au' # TODO: export constants to a separate module
+API_URL = 'https://app.alveo.edu.au'  # TODO: export constants to a separate module
+
 
 def parser():
     parser = argparse.ArgumentParser(description="Downloads documents in an Alveo Item List")
@@ -16,6 +16,7 @@ def parser():
     parser.add_argument('--patterns', required=True, action="store", type=str, help="File patterns to download")
     parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
     return parser.parse_args()
+
 
 def read_item_list(filename, client):
     """Read an item list from a file
@@ -35,8 +36,10 @@ def read_item_list(filename, client):
 
     return itemlist
 
+
 # this file name pattern allows galaxy to discover the dataset designation and type
 FNPAT = "%(designation)s#%(ext)s"
+
 
 def galaxy_name(itemname, fname):
     """construct a filename suitable for Galaxy dataset discovery
@@ -45,10 +48,11 @@ def galaxy_name(itemname, fname):
     """
 
     root, ext = os.path.splitext(fname)
-    ext = ext[1:] # remove initial .
+    ext = ext[1:]  # remove initial .
     fname = FNPAT % {'designation': root, 'ext': ext}
 
     return fname
+
 
 def download_documents(item_list, patterns, output_path):
     """
@@ -66,7 +70,6 @@ def download_documents(item_list, patterns, output_path):
     downloaded = []
 
     items = item_list.get_all()
-    filtered_documents = []
     for item in items:
         documents = item.get_documents()
         for doc in documents:
@@ -76,11 +79,11 @@ def download_documents(item_list, patterns, output_path):
                     try:
                         doc.download_content(dir_path=output_path, filename=fname)
                         downloaded.append(doc.get_filename())
-                    except:
-                        # maybe it doesn't exist or we have no access
-                        # TODO: report this
-                        pass
+                    except pyalveo.APIError as e:
+                        print("ERROR: " + str(e), file=sys.stderr)
+                        sys.exit(1)
     return downloaded
+
 
 def main():
     args = parser()
@@ -91,10 +94,11 @@ def main():
 
         item_list = read_item_list(args.item_list, client)
         patterns = args.patterns.split(',')
-        downloaded = download_documents(item_list, patterns, args.output_path)
+        download_documents(item_list, patterns, args.output_path)
     except pyalveo.APIError as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

@@ -1,7 +1,5 @@
-import sys
-import os
 import nltk
-from nltk.stem import *
+from nltk.stem import PorterStemmer, LancasterStemmer, snowball
 import argparse
 
 
@@ -12,6 +10,7 @@ def arguments():
     parser.add_argument('--stemmer', required=False, action="store", type=str, help="output file path")
     args = parser.parse_args()
     return args
+
 
 def stem_file(in_file, out_file, stemmer_type):
     with open(in_file, 'r') as fd:
@@ -27,6 +26,7 @@ def stem_file(in_file, out_file, stemmer_type):
                 output.write(stemmed_word)
                 output.write('\n')
 
+
 def get_stemmer(stemmer_type):
     if stemmer_type == 'lancaster':
         stemmer = LancasterStemmer()
@@ -35,6 +35,7 @@ def get_stemmer(stemmer_type):
     else:
         stemmer = snowball.EnglishStemmer()
     return stemmer
+
 
 if __name__ == '__main__':
     args = arguments()

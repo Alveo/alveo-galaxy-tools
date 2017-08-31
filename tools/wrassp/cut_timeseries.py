@@ -2,7 +2,6 @@ import csv
 import argparse
 
 
-
 def parser():
     parser = argparse.ArgumentParser(description="Cut data for a segment from a timeseries")
     parser.add_argument('--segment_list', required=True, action="store", type=str, help="File containing list of item URLs")
@@ -31,6 +30,7 @@ def read_segment_list(filename):
             segments.append(row)
 
     return segments
+
 
 def get_tsfile(ident, tsfiles):
     """Get the tsfile that matches the identifier """
@@ -70,7 +70,7 @@ def cut(tsfiles, segfile, cutpoint):
             for row in reader:
                 if row[0] == 'time':
                     tsheader = row
-                elif float(row[0]) > start and float(row[0]) < end:
+                elif start < float(row[0]) < end:
                     collect.append(row)
 
         # grab the row at the cut point(s)
@@ -80,9 +80,10 @@ def cut(tsfiles, segfile, cutpoint):
         result.append(row)
 
     headers.extend(tsheader)
-    return (headers, result)
+    return headers, result
 
-if __name__=='__main__':
+
+if __name__ == '__main__':
 
     args = parser()
 
@@ -90,8 +91,7 @@ if __name__=='__main__':
     tsfiles = args.timeseries.split(',')
     tsidents = args.identifier.split(',')
 
-
-    headers,rows = cut(zip(tsidents, tsfiles), args.segment_list, args.cutat)
+    headers, rows = cut(zip(tsidents, tsfiles), args.segment_list, args.cutat)
 
     with open(args.output_path, 'w') as out:
         writer = csv.writer(out, dialect=csv.excel_tab)

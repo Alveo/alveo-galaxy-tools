@@ -1,8 +1,5 @@
 from __future__ import print_function
-import json
 import argparse
-import sys
-import os
 import tgt
 
 
@@ -14,6 +11,7 @@ def parser():
     parser.add_argument('--regex', required=True, action="store", type=str, help="Regular expression matching segments")
     parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
     return parser.parse_args()
+
 
 def main():
     args = parser()
@@ -37,7 +35,6 @@ def main():
         out.write("start\tend\tduration\tlabel\tidentifier\n")
         for row in rows:
             out.write('\t'.join(row) + '\n')
-
 
 
 if __name__ == '__main__':

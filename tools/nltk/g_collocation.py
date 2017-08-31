@@ -1,8 +1,8 @@
-import sys
-import os
 import nltk
-from nltk.collocations import *
+from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
+from nltk.collocations import TrigramCollocationFinder, TrigramAssocMeasures
 import argparse
+
 
 def Parser():
     the_parser = argparse.ArgumentParser(description="Parse the sentence using Chart Parser and a supplied grammar")
@@ -13,8 +13,8 @@ def Parser():
     the_parser.add_argument('--coll_type', required=True, action="store", type=str, help="Type of collocations to find")
     the_parser.add_argument('--pos', required=True, action="store", type=str, help="Data input is a set of POS tags")
 
-    args = the_parser.parse_args()
-    return args
+    return the_parser.parse_args()
+
 
 def collocation(inp, outp, freq_filter, results, coll_type, pos):
     pos = bool(pos == 'true')
@@ -31,17 +31,18 @@ def collocation(inp, outp, freq_filter, results, coll_type, pos):
         for sent in sents:
             all_words += nltk.word_tokenize(sent)
     if coll_type == 'bigram':
-        measures = nltk.collocations.BigramAssocMeasures()
+        measures = BigramAssocMeasures()
         finder = BigramCollocationFinder.from_words(all_words)
     else:
-        measures = nltk.collocations.TrigramAssocMeasures()
+        measures = TrigramAssocMeasures()
         finder = TrigramCollocationFinder.from_words(all_words)
     finder.apply_freq_filter(int(freq_filter))
     colls = finder.nbest(measures.pmi, int(results))
-    with  open(outp, 'w') as output:
+    with open(outp, 'w') as output:
         for coll in colls:
             output.write("%s\t%s" % coll)
             output.write('\n')
+
 
 if __name__ == '__main__':
     args = Parser()

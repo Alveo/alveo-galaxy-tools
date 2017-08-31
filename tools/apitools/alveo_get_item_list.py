@@ -1,12 +1,10 @@
 from __future__ import print_function
-import json
 import argparse
 import pyalveo
 import sys
-import os
-from fnmatch import fnmatch
 
-API_URL = 'https://app.alveo.edu.au' # TODO: export constants to a separate module
+API_URL = 'https://app.alveo.edu.au'  # TODO: export constants to a separate module
+
 
 def parser():
     parser = argparse.ArgumentParser(description="Downloads documents in an Alveo Item List")
@@ -14,6 +12,7 @@ def parser():
     parser.add_argument('--item_list_url', required=True, action="store", type=str, help="Item List to download")
     parser.add_argument('--output', required=True, action="store", type=str, help="output file name")
     return parser.parse_args()
+
 
 def main():
     args = parser()
@@ -32,6 +31,7 @@ def main():
     except pyalveo.APIError as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

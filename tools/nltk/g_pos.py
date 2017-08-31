@@ -1,13 +1,12 @@
 import nltk
 import argparse
-import json
+
 
 def arguments():
     parser = argparse.ArgumentParser(description="tokenize a text")
     parser.add_argument('--input', required=True, action="store", type=str, help="input text file")
-    parser.add_argument('--output', required=True,  action="store", type=str, help="output file path")
-    args = parser.parse_args()
-    return args
+    parser.add_argument('--output', required=True, action="store", type=str, help="output file path")
+    return parser.parse_args()
 
 
 def postag(in_file, out_file):
@@ -18,7 +17,7 @@ def postag(in_file, out_file):
         text = fd.read()
 
     sentences = nltk.sent_tokenize(text)
-    
+
     with open(out_file, 'w') as output:
         for sentence in sentences:
             tokens = nltk.word_tokenize(sentence)

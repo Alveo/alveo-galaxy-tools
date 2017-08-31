@@ -5,11 +5,13 @@ import sys
 
 API_URL = 'https://app.alveo.edu.au'
 
+
 def parser():
     parser = argparse.ArgumentParser(description="Retrieves Alveo Item Lists")
     parser.add_argument('--api_key', required=True, action="store", type=str, help="Alveo API key")
     parser.add_argument('--output_path', required=True, action="store", type=str, help="File to store the API key in")
     return parser.parse_args()
+
 
 def write_key(api_key, output_path, client_module=pyalveo):
     """Tests whether an API key is valid and writes it to a file.
@@ -27,10 +29,12 @@ def write_key(api_key, output_path, client_module=pyalveo):
     :raises: pyalveo.APIError if the API request is not successful
 
     """
-    client = client_module.Client(api_key, API_URL, use_cache=False)
+    # validate the client key, raises an exception if it is not valid
+    client_module.Client(api_key, API_URL, use_cache=False)
     outfile = open(output_path, 'w')
     outfile.write(api_key)
     outfile.close()
+
 
 def main():
     args = parser()
@@ -39,6 +43,7 @@ def main():
     except Exception as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

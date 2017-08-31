@@ -1,15 +1,14 @@
 import sys
 import nltk
 import argparse
-from nltk.corpus import PlaintextCorpusReader
+
 
 def arguments():
     parser = argparse.ArgumentParser(description="run NER on a text")
     parser.add_argument('--input', required=True, action="store", type=str, help="input text file")
-    parser.add_argument('--grammar', required=True,  action="store", type=str, help="grammar file")
-    parser.add_argument('--output', required=True,  action="store", type=str, help="output file path")
-    args = parser.parse_args()
-    return args
+    parser.add_argument('--grammar', required=True, action="store", type=str, help="grammar file")
+    parser.add_argument('--output', required=True, action="store", type=str, help="output file path")
+    return parser.parse_args()
 
 
 def chart_parse(in_file, grammar_file, out_file):
@@ -32,10 +31,12 @@ def chart_parse(in_file, grammar_file, out_file):
                     output.write('\n')
 
     except Exception as e:
-        message = "Error with parsing. Check the input files are correct and the grammar contains every word in the input sequence. \n----\n" + str(e) + "\n"
+        message = """Error with parsing. Check the input files are correct
+and the grammar contains every word in the input sequence. \n----\n""" + str(e) + "\n"
         sys.stderr.write(message)
         sys.exit()
     output.close()
+
 
 if __name__ == '__main__':
     args = arguments()

@@ -2,12 +2,12 @@ import nltk
 from nltk import FreqDist
 import argparse
 
+
 def arguments():
-  parser = argparse.ArgumentParser(description="generate a word frequency table from a text")
-  parser.add_argument('--input', required=True, action="store", type=str, help="input text file")
-  parser.add_argument('--output', required=True,  action="store", type=str, help="output file path")
-  args = parser.parse_args()
-  return args
+    parser = argparse.ArgumentParser(description="generate a word frequency table from a text")
+    parser.add_argument('--input', required=True, action="store", type=str, help="input text file")
+    parser.add_argument('--output', required=True, action="store", type=str, help="output file path")
+    return parser.parse_args()
 
 
 def frequency(in_file, out_file):
@@ -18,13 +18,13 @@ def frequency(in_file, out_file):
         text = fd.read()
 
     words = nltk.word_tokenize(text)
-    frequency = FreqDist(words)
-    total = float(frequency.N())
-    
+    fdist = FreqDist(words)
+    total = float(fdist.N())
+
     with open(out_file, 'w') as output:
         output.write("Word\tCount\tPercent\n")
-        for pair in frequency.items():
-            output.write("{pair[0]}\t{pair[1]}\t{pc:.2f}\n".format(pair=pair, pc=100*pair[1]/total))
+        for pair in fdist.items():
+            output.write("{pair[0]}\t{pair[1]}\t{pc:.2f}\n".format(pair=pair, pc=100 * pair[1] / total))
 
 
 if __name__ == '__main__':
