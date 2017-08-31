@@ -1,6 +1,8 @@
 Alveo Galaxy Tools
 ==================
 
+[![Build Status](https://travis-ci.org/Alveo/alveo-galaxy-tools.svg?branch=master)](https://travis-ci.org/Alveo/alveo-galaxy-tools)
+
 Galaxy tools written to process speech and language data for the Alveo project.
 
 Testing
@@ -31,3 +33,4 @@ common dependencies (requirements).
  * nltk - text processing tools based on the python NLTK module
 
 Since the tools work together, there is shared test data in the test-data directory.
+
