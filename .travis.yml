@@ -11,7 +11,7 @@ jobs:
       addons: {}
       before_install: skip
       install:
-        - pip install flake8 flake8-import-order planemo
+        - pip install flake8 planemo
         - planemo --version
         - echo $TRAVIS_COMMIT_RANGE
         - |

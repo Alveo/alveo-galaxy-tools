@@ -29,3 +29,5 @@ upload: upload-apitools upload-nltk upload-parse_eval upload-textgrid upload-vow
 lint:
 	$(PLANEMO) shed_lint --tools --ensure_metadata --urls --report_level warn --fail_level error --recursive tools
 
+flake8:
+	flake8 --ignore=E501 tools
