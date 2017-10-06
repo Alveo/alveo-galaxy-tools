@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<toolbox>
+    <section id="alveo" name="Alveo" version="">
+        <tool file="/local_tools/tools/apitools/alveo_api_key.xml"></tool>
+        <tool file="/local_tools/tools/apitools/alveo_item_list_importer.xml"></tool>
+        <tool file="/local_tools/tools/apitools/alveo_get_item_list.xml"></tool>
+        <tool file="/local_tools/tools/apitools/austalk-select-hVd-words.xml"></tool>
+        <tool file="/local_tools/tools/apitools/alveo_get_item_data.xml"></tool>
+        <tool file="/local_tools/tools/apitools/alveo_get_primary_text.xml"></tool>
+    </section>
+
+    <section id="textgrid" name="TextGrid" version="">
+        <tool file="/local_tools/tools/textgrid/query_textgrids.xml"></tool>
+    </section>
+
+    <section id="signal_processing" name="Signal Processing" version="">
+        <tool file="/local_tools/tools/wrassp/cut_timeseries.xml"></tool>
+        <tool file="/local_tools/tools/wrassp/g_f0.xml"></tool>
+        <tool file="/local_tools/tools/wrassp/g_cepstrum.xml"></tool>
+        <tool file="/local_tools/tools/wrassp/g_forest.xml"></tool>
+    </section>
+
+    <section id="graphics" name="Graphics" version="">
+        <tool file="/local_tools/tools/vowel-plot/phonR_tool.xml"></tool>
+    </section>
+
+    <section id="maus" name="MAUS" version="">
+        <tool file="/local_tools/tools/maus/items_to_bpf.xml"></tool>
+        <tool file="/local_tools/tools/maus/maus.xml"></tool>
+    </section>
+
+</toolbox>
