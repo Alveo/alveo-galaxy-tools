@@ -4,37 +4,16 @@ import pyalveo
 import sys
 import os
 from fnmatch import fnmatch
-import csv
-
-API_URL = 'https://app.alveo.edu.au'  # TODO: export constants to a separate module
+from util import API_URL, read_item_list
 
 
 def parser():
-    parser = argparse.ArgumentParser(description="Downloads documents in an Alveo Item List")
-    parser.add_argument('--api_key', required=True, action="store", type=str, help="Alveo API key")
-    parser.add_argument('--item_list', required=True, action="store", type=str, help="File containing list of item URLs")
-    parser.add_argument('--patterns', required=True, action="store", type=str, help="File patterns to download")
-    parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
-    return parser.parse_args()
-
-
-def read_item_list(filename, client):
-    """Read an item list from a file
-    which should be a tabular formatted file
-    with one column header ItemURL.
-    Return an instance of ItemGroup"""
-
-    with open(filename) as fd:
-        csvreader = csv.DictReader(fd, dialect='excel-tab')
-        if 'ItemURL' not in csvreader.fieldnames:
-            return None
-        itemurls = []
-        for row in csvreader:
-            itemurls.append(row['ItemURL'])
-
-    itemlist = pyalveo.ItemGroup(itemurls, client)
-
-    return itemlist
+    p = argparse.ArgumentParser(description="Downloads documents in an Alveo Item List")
+    p.add_argument('--api_key', required=True, action="store", type=str, help="Alveo API key")
+    p.add_argument('--item_list', required=True, action="store", type=str, help="File containing list of item URLs")
+    p.add_argument('--patterns', required=True, action="store", type=str, help="File patterns to download")
+    p.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
+    return p.parse_args()
 
 
 # this file name pattern allows galaxy to discover the dataset designation and type
@@ -75,7 +54,7 @@ def download_documents(item_list, patterns, output_path):
         for doc in documents:
             for pattern in patterns:
                 if not pattern == '' and fnmatch(doc.get_filename(), pattern):
-                    fname = galaxy_name(item.metadata()['alveo:metadata']['dc:identifier'], doc.get_filename())
+                    fname = galaxy_name(item.metadata()['alveo:metadata']['dcterms:identifier'], doc.get_filename())
                     try:
                         doc.download_content(dir_path=output_path, filename=fname)
                         downloaded.append(doc.get_filename())

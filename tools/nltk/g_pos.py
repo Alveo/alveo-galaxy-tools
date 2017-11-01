@@ -1,6 +1,8 @@
 import nltk
 import argparse
 
+nltk.download('averaged_perceptron_tagger', quiet=True)
+
 
 def arguments():
     parser = argparse.ArgumentParser(description="tokenize a text")

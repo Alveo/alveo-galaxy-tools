@@ -2,6 +2,8 @@ import nltk
 import string
 import argparse
 
+nltk.download('punkt', quiet=True)
+
 
 def arguments():
     parser = argparse.ArgumentParser(description="tokenize a text")
@@ -13,7 +15,7 @@ def arguments():
 
 
 def strip_punct(text):
-    table = string.maketrans("", "")
+    table = text.maketrans("", "")
     return text.translate(table, string.punctuation)
 
 
@@ -23,14 +25,15 @@ def tokenize(in_file, out_file, lower=False, nopunct=False):
 
     if lower:
         text = text.lower()
-    if nopunct:
-        text = strip_punct(text)
     result = []
     # text = unicode(text, errors='ignore')
     sentences = nltk.sent_tokenize(text)
     for sentence in sentences:
         tokens = nltk.word_tokenize(sentence)
+        if nopunct:
+            tokens = filter(lambda w: w not in string.punctuation, tokens)
         result.append(tokens)
+
     with open(out_file, 'w') as output:
         # write one token per line
         for sentence in result:

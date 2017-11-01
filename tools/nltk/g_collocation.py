@@ -3,6 +3,8 @@ from nltk.collocations import BigramCollocationFinder, BigramAssocMeasures
 from nltk.collocations import TrigramCollocationFinder, TrigramAssocMeasures
 import argparse
 
+nltk.download('punkt', quiet=True)
+
 
 def Parser():
     the_parser = argparse.ArgumentParser(description="Parse the sentence using Chart Parser and a supplied grammar")
@@ -37,11 +39,12 @@ def collocation(inp, outp, freq_filter, results, coll_type, pos):
         measures = TrigramAssocMeasures()
         finder = TrigramCollocationFinder.from_words(all_words)
     finder.apply_freq_filter(int(freq_filter))
-    colls = finder.nbest(measures.pmi, int(results))
+    # score the ngrams and get the first N
+    colls = finder.score_ngrams(measures.pmi)[:int(results)]
     with open(outp, 'w') as output:
         for coll in colls:
-            output.write("%s\t%s" % coll)
-            output.write('\n')
+            (a, b), score = coll
+            output.write("%s\t%s\n" % (a, b))
 
 
 if __name__ == '__main__':

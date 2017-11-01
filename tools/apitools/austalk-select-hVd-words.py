@@ -2,10 +2,10 @@ from __future__ import print_function
 import argparse
 import pyalveo
 import sys
+from util import API_URL
 
-API_URL = 'https://app.alveo.edu.au/'
 PREFIXES = """
-PREFIX dc:<http://purl.org/dc/terms/>
+PREFIX dcterms:<http://purl.org/dc/terms/>
 PREFIX austalk:<http://ns.austalk.edu.au/>
 PREFIX olac:<http://www.language-archives.org/OLAC/1.1/>
 PREFIX ausnc:<http://ns.ausnc.org.au/schemas/ausnc_md_model/>

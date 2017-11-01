@@ -3,10 +3,8 @@ import argparse
 import pyalveo
 import sys
 import os
-import csv
 
-
-API_URL = 'https://app.alveo.edu.au'  # TODO: export constants to a separate module
+from util import API_URL, read_item_list
 
 
 def parser():
@@ -15,11 +13,6 @@ def parser():
     parser.add_argument('--item_list', required=True, action="store", type=str, help="File containing list of item URLs")
     parser.add_argument('--output_path', required=True, action="store", type=str, help="Path to output file")
     return parser.parse_args()
-
-
-def get_item_list(api_key, item_list_url):
-    client = pyalveo.Client(api_key=api_key, api_url=API_URL, use_cache=False)
-    return client.get_item_list(item_list_url)
 
 
 # this file name pattern allows galaxy to discover the dataset designation and type
@@ -34,12 +27,12 @@ def galaxy_name(fname, ext):
     return fname
 
 
-def download_documents(item_list, output_path):
+def download_text(item_list, output_path):
     """
-    Downloads a list of documents to the directory specificed by output_path.
+    Downloads primary text from a list of items to the directory specified by output_path.
 
-    :type documents: list of pyalveo.Document
-    :param documents: Documents to download
+    :type item_list: ItemGroup
+    :param item_list: item list to download
 
     :type output_path: String
     :param output_path: directory to download to the documents to
@@ -52,7 +45,7 @@ def download_documents(item_list, output_path):
     items = item_list.get_all()
     for item in items:
         md = item.metadata()
-        fname = os.path.join(output_path, galaxy_name(md['alveo:metadata']['dc:identifier'], 'txt'))
+        fname = os.path.join(output_path, galaxy_name(md['alveo:metadata']['dcterms:identifier'], 'txt'))
         content = item.get_primary_text()
         if content is not None:
             with open(fname, 'w') as out:
@@ -61,32 +54,13 @@ def download_documents(item_list, output_path):
     return downloaded
 
 
-def read_item_list(filename, client):
-    """Read an item list from a file
-    which should be a tabular formatted file
-    with one column header ItemURL.
-    Return an instance of ItemGroup"""
-
-    with open(filename) as fd:
-        csvreader = csv.DictReader(fd, dialect='excel-tab')
-        if 'ItemURL' not in csvreader.fieldnames:
-            return None
-        itemurls = []
-        for row in csvreader:
-            itemurls.append(row['ItemURL'])
-
-    itemlist = pyalveo.ItemGroup(itemurls, client)
-
-    return itemlist
-
-
 def main():
     args = parser()
     try:
         api_key = open(args.api_key, 'r').read().strip()
         client = pyalveo.Client(api_url=API_URL, api_key=api_key, use_cache=False)
         item_list = read_item_list(args.item_list, client)
-        download_documents(item_list, args.output_path)
+        download_text(item_list, args.output_path)
     except pyalveo.APIError as e:
         print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)

@@ -1,8 +1,12 @@
 <?xml version="1.0"?>
 <toolbox>
+    <section id="getext" name="Get Data">
+        <tool file="data_source/upload.xml" />
+    </section>
     <section id="alveo" name="Alveo" version="">
         <tool file="/local_tools/tools/apitools/alveo_api_key.xml"></tool>
         <tool file="/local_tools/tools/apitools/alveo_item_list_importer.xml"></tool>
+        <tool file="/local_tools/tools/apitools/alveo_data_importer.xml"></tool>
         <tool file="/local_tools/tools/apitools/alveo_get_item_list.xml"></tool>
         <tool file="/local_tools/tools/apitools/austalk-select-hVd-words.xml"></tool>
         <tool file="/local_tools/tools/apitools/alveo_get_item_data.xml"></tool>
@@ -27,6 +31,16 @@
     <section id="maus" name="MAUS" version="">
         <tool file="/local_tools/tools/maus/items_to_bpf.xml"></tool>
         <tool file="/local_tools/tools/maus/maus.xml"></tool>
+    </section>
+
+    <section id="nltk" name="NLTK" version="">
+        <tool file="/local_tools/tools/nltk/g_tokenize.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_read_sents.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_pos.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_frequency.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_collocation.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_stemmer.xml"></tool>
+        <tool file="/local_tools/tools/nltk/g_chart_parser.xml"></tool>
     </section>
 
 </toolbox>
