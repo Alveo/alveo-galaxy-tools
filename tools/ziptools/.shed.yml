@@ -1,0 +1,7 @@
+categories: [NLP]
+description: textgrid tools
+homepage_url: http://alveo.edu.au/
+long_description: Tools to manipulate Praat TextGrid annotations
+name: textgrid
+owner: stevecassidy
+remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools
