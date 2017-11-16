@@ -23,8 +23,10 @@ upload-wrassp:
 upload-maus:
 	$(PLANEMO) shed_update --force_repository_creation --check_diff -t $(TOOLSHED) tools/maus
 
+upload-ziptools:
+	$(PLANEMO) shed_update --force_repository_creation --check_diff -t $(TOOLSHED) tools/ziptools
 
-upload: upload-apitools upload-nltk upload-parse_eval upload-textgrid upload-vowel-plot upload-wrassp upload-maus
+upload: upload-apitools upload-nltk upload-parse_eval upload-textgrid upload-vowel-plot upload-wrassp upload-maus upload-ziptools
 
 lint:
 	$(PLANEMO) shed_lint --tools --ensure_metadata --urls --report_level warn --fail_level error --recursive tools

@@ -2,6 +2,8 @@ import nltk
 from nltk import FreqDist
 import argparse
 
+nltk.download('punkt', quiet=True)
+
 
 def arguments():
     parser = argparse.ArgumentParser(description="generate a word frequency table from a text")

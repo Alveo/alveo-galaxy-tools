@@ -13,6 +13,10 @@
         <tool file="/local_tools/tools/apitools/alveo_get_primary_text.xml"></tool>
     </section>
 
+    <section id="zip" name="Zip" version="">
+        <tool file="/local_tools/tools/ziptools/zipcollection.xml"></tool>
+    </section>
+
     <section id="textgrid" name="TextGrid" version="">
         <tool file="/local_tools/tools/textgrid/query_textgrids.xml"></tool>
     </section>

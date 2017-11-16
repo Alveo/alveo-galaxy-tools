@@ -49,7 +49,7 @@ def download_text(item_list, output_path):
         content = item.get_primary_text()
         if content is not None:
             with open(fname, 'w') as out:
-                out.write(content)
+                out.write(content.decode('utf-8'))
 
     return downloaded
 

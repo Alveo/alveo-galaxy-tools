@@ -1,0 +1,31 @@
+<tool id="zipcollection" name="Create a Zip file" version="0.01">
+    <description>from one or more datasets</description>
+
+    <command interpreter="python">
+        zipcollection.py --dataset "${",".join(map(str, $dataset))}"  --identifier "${",".join(map(str, [t.element_identifier + "." + t.extension for t in $dataset]))}" --output $output
+    </command>
+
+    <inputs>
+        <param name="dataset" format="data" type="data"
+               multiple="true" label="DataSets" help="Datasets to include in zip"/>
+        <param name="job_name" type="text" size="25"
+               label="Name of output zip file" value="dataset"/>
+    </inputs>
+
+    <outputs>
+        <data format="zip" name="output" label="$job_name" />
+    </outputs>
+
+    <tests>
+        <!-- can't compare zip file as it changes based on time the test is run
+        <test>
+            <param name="dataset" value="textgrids/1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
+            <param name="job_name" value="test.zip"/>
+            <output name="output" ftype="zip"/>
+        </test>
+        -->
+    </tests>
+
+    <help>Creates a zip file from a dataset or dataset collection</help>
+
+</tool>

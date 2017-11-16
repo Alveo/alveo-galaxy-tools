@@ -1,7 +1,7 @@
-categories: [NLP]
-description: textgrid tools
+categories: [Data Export]
+description: zip tools
 homepage_url: http://alveo.edu.au/
-long_description: Tools to manipulate Praat TextGrid annotations
-name: textgrid
+long_description: Tools to create zip files
+name: ziptools
 owner: stevecassidy
 remote_repository_url: https://github.com/Alveo/alveo-galaxy-tools

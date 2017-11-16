@@ -6,7 +6,7 @@
     </requirements>
 
     <command interpreter="python">
-        alveo_get_primary_text.py --api_key $api_key --item_list_url $item_list_url --output_path ItemListData
+        alveo_get_primary_text.py --api_key $api_key --item_list $item_list --output_path ItemListData
     </command>
 
     <inputs>
@@ -27,7 +27,7 @@
         <test>
             <param name="api_key" value="api-key.dat"/>
             <param name="import_list" value="item-lists.dat"/>
-            <param name="item_list_url" value="https://app.alveo.edu.au/item_lists/180"/>
+            <param name="item_list" value="item_list_180.dat"/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="6">
                     <element name="GCSAusE02">
@@ -40,7 +40,7 @@
         <test>
             <param name="api_key" value="api-key.dat"/>
             <param name="import_list" value="item-lists.dat"/>
-            <param name="item_list_url" value="https://app.alveo.edu.au/item_lists/52"/>
+            <param name="item_list" value="item_list_52.dat"/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="0">
             </output_collection>
