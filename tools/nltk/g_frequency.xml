@@ -6,25 +6,20 @@
     </requirements>
 
     <command interpreter="python">
-        g_frequency.py --input $input1 --output $frequency_table
+        g_frequency.py --input "${",".join(map(str, $input))}" --output $frequency_table
     </command>
 
     <inputs>
-        <param name="input1" type="data" format="txt"
-               label="Select a suitable input file from your history"/>
-
-        <param name="job_name" type="text" size="25"
-               label="Supply a name for the outputs to remind you what they contain"
-               value="Frequency List"/>
+        <param name="input" type="data" format="txt" multiple="true"
+               label="Input text(s)"/>
     </inputs>
     <outputs>
-        <data format="tabular" name="frequency_table" label="${job_name}"/>
+        <data format="tabular" name="frequency_table" label="Frequency Table"/>
     </outputs>
 
     <tests>
         <test>
-            <param name='input1' value='sample_text.txt'/>
-            <param name='job_name' value='testfrequency'/>
+            <param name='input' value='sample_text.txt'/>
             <output name='frequency_table' file='sample_text_frequency.dat'/>
         </test>
     </tests>

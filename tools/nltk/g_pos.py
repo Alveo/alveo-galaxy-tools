@@ -5,6 +5,8 @@ import io
 
 
 nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('punkt', quiet=True)
+
 
 
 def arguments():
@@ -30,7 +32,7 @@ def postag(in_file, out_file):
             postags = nltk.pos_tag(tokens)
             for postag in postags:
                 # print postag
-                p = "%s/%s" % postag
+                p = "%s/%s " % postag
                 output.write(p)
         output.write('\n')
 

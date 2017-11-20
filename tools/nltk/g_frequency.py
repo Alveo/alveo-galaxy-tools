@@ -12,14 +12,18 @@ def arguments():
     return parser.parse_args()
 
 
-def frequency(in_file, out_file):
+def frequency(textfiles, out_file):
     """Input: a text file
     Output: a table of word frequency with three columns for Word, Count and Percent frequency
     """
-    with open(in_file, 'r') as fd:
-        text = fd.read()
 
-    words = nltk.word_tokenize(text)
+    words = []
+    for textfile in textfiles:
+        with open(textfile, 'r') as fd:
+            text = fd.read()
+
+        words.extend( nltk.word_tokenize(text) )
+
     fdist = FreqDist(words)
     total = float(fdist.N())
 
@@ -31,4 +35,5 @@ def frequency(in_file, out_file):
 
 if __name__ == '__main__':
     args = arguments()
-    frequency(args.input, args.output)
+    textfiles = args.input.split(',')
+    frequency(textfiles, args.output)

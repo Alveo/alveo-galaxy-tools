@@ -12,13 +12,10 @@
     <inputs>
         <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
         <param name="item_list" type="data" format="item_list" label="Item List" help=""/>
-
-        <param name="job_name" type="text" size="25"
-               label="Supply a name for the outputs to remind you what they contain" value="Item List downloaded from Alveo"/>
     </inputs>
 
     <outputs>
-        <collection type="list" label="$job_name" name="output1">
+        <collection type="list" label="$item_list Texts" name="output1">
             <discover_datasets pattern="(?P&lt;designation&gt;[^_]+)_(?P&lt;ext&gt;.+)" directory="ItemListData"/>
         </collection>
     </outputs>
@@ -26,7 +23,6 @@
     <tests>
         <test>
             <param name="api_key" value="api-key.dat"/>
-            <param name="import_list" value="item-lists.dat"/>
             <param name="item_list" value="item_list_180.dat"/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="6">
@@ -39,7 +35,6 @@
         </test>
         <test>
             <param name="api_key" value="api-key.dat"/>
-            <param name="import_list" value="item-lists.dat"/>
             <param name="item_list" value="item_list_52.dat"/>
             <param name="output_path" value="test_out"/>
             <output_collection name="output1" type="list" count="0">
