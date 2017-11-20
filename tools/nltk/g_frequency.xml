@@ -25,7 +25,7 @@
         <test>
             <param name='input1' value='sample_text.txt'/>
             <param name='job_name' value='testfrequency'/>
-            <output name='testfrequency' file='sample_text_frequency.dat'/>
+            <output name='frequency_table' file='sample_text_frequency.dat'/>
         </test>
     </tests>
     <help>

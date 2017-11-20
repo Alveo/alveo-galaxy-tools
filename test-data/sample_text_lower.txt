@@ -1,7 +1,10 @@
-dada
-project
-update
-the
+some
+text
+that
+is
+nøt
+øß
+ascii
 dada
 project
 is
@@ -17,6 +20,7 @@ them
 on
 the
 web
+.
 language
 resources
 are
@@ -26,6 +30,7 @@ of
 language
 as
 audio
+,
 video
 and
 text
@@ -35,8 +40,9 @@ study
 language
 and
 build
-technoogy
+technology
 systems
+.
 the
 project
 has
@@ -77,6 +83,7 @@ collected
 by
 trevor
 johnston
+.
 recently
 we
 have
@@ -88,6 +95,7 @@ will
 be
 part
 of
+,
 and
 so
 the
@@ -99,11 +107,14 @@ picked
 up
 a
 little
+.
 the
 australian
 national
 corpus
+(
 ausnc
+)
 is
 an
 effort
@@ -118,6 +129,7 @@ of
 language
 in
 australia
+.
 the
 core
 idea
@@ -142,6 +154,7 @@ a
 common
 technical
 infrastructure
+.
 using
 some
 funding
@@ -161,6 +174,7 @@ search
 on
 two
 collections
+:
 the
 australian
 corpus
@@ -173,6 +187,7 @@ of
 oz
 early
 english
+.
 we
 now
 have
@@ -200,9 +215,9 @@ that
 will
 support
 it
+.
 what
-we
-'ve
+we’ve
 already
 done
 is
@@ -216,18 +231,23 @@ corpora
 from
 their
 meta-data
+(
 descriptions
 of
 each
 text
+)
 and
 the
 annotation
+(
 denoting
 things
 within
 the
 texts
+)
+.
 while
 the
 pilot
@@ -245,6 +265,7 @@ search
 using
 the
 meta-data
+(
 look
 for
 this
@@ -253,9 +274,11 @@ texts
 written
 after
 1900
+)
 and
 the
 annotation
+(
 find
 this
 in
@@ -263,6 +286,8 @@ the
 titles
 of
 articles
+)
+.
 this
 project
 is
@@ -273,7 +298,9 @@ australian
 national
 data
 service
+(
 ands
+)
 and
 is
 a
@@ -283,15 +310,18 @@ michael
 haugh
 at
 griffith
+.
 the
 big
 australian
 speech
 corpus
+,
 more
 recently
 renamed
 austalk
+,
 is
 an
 arc
@@ -312,6 +342,7 @@ new
 freely
 available
 corpus
+.
 the
 project
 involves
@@ -326,8 +357,8 @@ who
 will
 have
 a
-'black
-box
+‘black
+box’
 recording
 station
 to
@@ -342,6 +373,7 @@ reading
 words
 and
 sentences
+,
 being
 interviewed
 and
@@ -349,6 +381,7 @@ doing
 the
 map
 task
+–
 a
 game
 designed
@@ -359,6 +392,7 @@ speech
 between
 two
 people
+.
 our
 part
 of
@@ -375,6 +409,7 @@ will
 store
 the
 audio
+,
 video
 and
 annotation
@@ -385,6 +420,7 @@ make
 up
 the
 corpus
+.
 dada
 will
 be
@@ -419,6 +455,7 @@ from
 the
 collection
 sites
+.
 an
 important
 feature
@@ -436,6 +473,7 @@ subjects
 in
 the
 recording
+.
 some
 annotation
 of
@@ -445,6 +483,7 @@ will
 be
 done
 automatically
+,
 for
 example
 some
@@ -456,7 +495,9 @@ read
 words
 and
 sentences
+.
 later
+,
 we
 will
 move
@@ -470,6 +511,7 @@ some
 of
 the
 data
+–
 for
 example
 transcripts
@@ -480,6 +522,7 @@ and
 map
 task
 sessions
+.
 all
 of
 this
@@ -495,6 +538,7 @@ to
 create
 a
 large
+,
 freely
 available
 research
@@ -502,6 +546,7 @@ collection
 for
 australian
 english
+.
 since
 the
 development
@@ -512,7 +557,8 @@ involves
 people
 outside
 macquarie
-i
+,
+we
 have
 started
 using
@@ -523,6 +569,7 @@ repository
 for
 the
 code
+.
 as
 of
 this
@@ -548,6 +595,7 @@ and
 work
 on
 it
+,
 but
 we
 hope
@@ -558,6 +606,7 @@ done
 within
 a
 month
+.
 the
 public
 dada
@@ -574,12 +623,14 @@ network
 upgrades
 at
 macquarie
-it
-'s
+(
+it’s
 only
 visible
 inside
 mq
+)
+–
 i
 hope
 to
@@ -597,6 +648,7 @@ loaded
 up
 for
 testing
+.
 2011
 looks
 like
@@ -608,6 +660,7 @@ significant
 year
 for
 dada
+.
 we
 hope
 to
@@ -620,6 +673,7 @@ number
 of
 significant
 text
+,
 audio
 and
 video
@@ -639,3 +693,4 @@ and
 language
 technology
 communities
+.

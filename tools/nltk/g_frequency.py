@@ -25,7 +25,7 @@ def frequency(in_file, out_file):
 
     with open(out_file, 'w') as output:
         output.write("Word\tCount\tPercent\n")
-        for pair in fdist.items():
+        for pair in sorted(fdist.items()):
             output.write("{pair[0]}\t{pair[1]}\t{pc:.2f}\n".format(pair=pair, pc=100 * pair[1] / total))
 
 

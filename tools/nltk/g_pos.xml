@@ -4,7 +4,7 @@
     <requirements>
         <requirement type="package" version="3.2.1">nltk</requirement>
     </requirements>
-    
+
     <command interpreter="python">
         g_pos.py --input $input1 --output $postags
     </command>
@@ -18,14 +18,14 @@
                value="POS Tags"/>
     </inputs>
     <outputs>
-        <data format="json" name="postags" label="${job_name}"/>
+        <data format="txt" name="postags" label="${job_name}"/>
     </outputs>
 
     <tests>
         <test>
-            <param name='input1' value='sample_text_tok.json'/>
+            <param name='input1' value='sample_text.txt'/>
             <param name='job_name' value='testpos1'/>
-            <output name='tokens' file='sample_text_pos.json'/>
+            <output name='postags' file='sample_text_pos.dat'/>
         </test>
     </tests>
 

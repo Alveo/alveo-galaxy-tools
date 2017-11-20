@@ -2,7 +2,7 @@
     <description>Downloads files from the items in an Galaxy list of items</description>
 
     <requirements>
-        <requirement type="package" version="0.7">pyalveo</requirement>
+        <requirement type="package" version="1.0.4">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">
