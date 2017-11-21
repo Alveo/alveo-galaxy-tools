@@ -22,7 +22,7 @@ def frequency(textfiles, out_file):
         with open(textfile, 'r') as fd:
             text = fd.read()
 
-        words.extend( nltk.word_tokenize(text) )
+        words.extend(nltk.word_tokenize(text))
 
     fdist = FreqDist(words)
     total = float(fdist.N())

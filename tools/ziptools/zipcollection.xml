@@ -2,12 +2,19 @@
     <description>from one or more datasets</description>
 
     <command interpreter="python">
-        zipcollection.py --dataset "${",".join(map(str, $dataset))}"  --identifier "${",".join(map(str, [t.element_identifier + "." + t.extension for t in $dataset]))}" --output $output
+        zipcollection.py --dataset "${",".join(map(str, $dataset))}"
+        --identifier "${",".join(map(str, [t.element_identifier + "." + t.extension for t in $dataset]))}"
+        #if $extension:
+          --extension $extension
+        #end if
+        --output $output
     </command>
 
     <inputs>
         <param name="dataset" format="data" type="data"
                multiple="true" label="DataSets" help="Datasets to include in zip"/>
+        <param name="extension" type="text" size="10" format="text"
+               label="New extension for files (leave empty to use the dataset type, eg txt, tabbed)"/>
         <param name="job_name" type="text" size="25"
                label="Name of output zip file" value="dataset"/>
     </inputs>
@@ -21,9 +28,9 @@
         <test>
             <param name="dataset" value="textgrids/1_1308_2_22_020-ch6-speaker16.TextGrid_TextGrid"/>
             <param name="job_name" value="test.zip"/>
-            <output name="output" ftype="zip"/>
+            <output name="output" ftype="zip" file="test.zip"/>
         </test>
-        -->
+         -->
     </tests>
 
     <help>Creates a zip file from a dataset or dataset collection</help>

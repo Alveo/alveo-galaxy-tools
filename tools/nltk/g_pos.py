@@ -3,10 +3,8 @@ import nltk
 import argparse
 import io
 
-
 nltk.download('averaged_perceptron_tagger', quiet=True)
 nltk.download('punkt', quiet=True)
-
 
 
 def arguments():
