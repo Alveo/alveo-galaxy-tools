@@ -1,8 +1,8 @@
-<tool id="alveo_get_primary_text" name="Get Text from Alveo" version="0.01">
+<tool id="alveo_get_primary_text" name="Get Text from Alveo" version="1.0">
     <description>Downloads primary text from the items in an Alveo Item List</description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

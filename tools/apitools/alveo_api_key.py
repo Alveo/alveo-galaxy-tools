@@ -16,7 +16,8 @@ def main():
     try:
         write_key(args.api_key, args.output_path)
     except Exception as e:
-        print("ERROR: " + str(e), file=sys.stderr)
+        print(e, file=sys.stderr)
+ #       print("ERROR: " + str(e), file=sys.stderr)
         sys.exit(1)
 
 

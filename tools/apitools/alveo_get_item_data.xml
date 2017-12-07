@@ -1,8 +1,8 @@
-<tool id="alveo_get_item_data" name="Get Alveo Data for Items" version="0.01">
+<tool id="alveo_get_item_data" name="Get Alveo Data for Items" version="1.0">
     <description>Downloads files from the items in an Galaxy list of items</description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

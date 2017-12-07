@@ -25,7 +25,7 @@ def write_key(api_key, output_path, client_module=pyalveo):
 
     """
     # validate the client key, raises an exception if it is not valid
-    client_module.Client(api_key, API_URL, use_cache=False)
+    client_module.Client(api_key=api_key, api_url=API_URL, use_cache=False)
     outfile = open(output_path, 'w')
     outfile.write(api_key)
     outfile.close()
@@ -53,3 +53,4 @@ def read_item_list(filename, client):
     itemlist = pyalveo.ItemGroup(itemurls, client)
 
     return itemlist
+

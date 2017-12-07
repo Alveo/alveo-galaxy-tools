@@ -1,24 +1,28 @@
-<tool id="alveo_get_item_list" name="Get Item URLs for Item List" version="0.01">
+<tool id="alveo_get_item_list" name="Import Item List" version="1.0">
     <description>Retrieves Item URLs from an Alveo Item List</description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">
         alveo_get_item_list.py --api_key $api_key --item_list_url $item_list_url --output $output
     </command>
 
-    <inputs>
-        <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
-        <param name="import_list" type="data" format="tabular" label="Imported Alveo Item List" help=""/>
+    <!--
+        code file implements the dynamic_options below to fetch the users item
+        lists from the Alveo API
+    -->
+    <code file="item_list_util.py" />
 
-        <param name="item_list_url" type="select" label="Alveo Item List" help="The Alveo Item List you wish to import">
-            <options from_dataset="import_list">
-                <column name="name" index="0"/>
-                <column name="value" index="1"/>
-            </options>
-        </param>
+    <inputs>
+        <param name="api_key" type="data" format="auth_token" label="API Key"
+               help="Your Alveo API key (use Store Alveo API Key tool to create)"/>
+
+        <param name="item_list_url" type="select"
+               dynamic_options="ds_item_lists_options(api_key)"
+               label="Alveo Item List"
+               help="The Alveo Item List you wish to import (requires API Key)"/>
 
         <param name="job_name" type="text" size="25"
                label="Supply a name for the outputs to remind you what they contain" value="Item List"/>
@@ -31,7 +35,6 @@
     <tests>
         <test>
             <param name="api_key" value="api-key.dat"/>
-            <param name="import_list" value="item-lists.dat"/>
             <param name="item_list_url" value="https://app.alveo.edu.au/item_lists/180"/>
             <param name="job_name" value="test_output_180.dat"/>
             <output name="output" file="item_list_180.dat"/>

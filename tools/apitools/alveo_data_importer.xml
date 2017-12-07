@@ -1,10 +1,10 @@
-<tool id="alveo_data_importer" name="Get Item URLs for Item List + API Key" version="0.01">
+<tool id="alveo_data_importer" name="Get Item URLs for Item List + API Key" version="1.0">
     <description>Stores API Key and Retrieves Item URLs from an Alveo Item List
         Version called directly from the Alveo web application
     </description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

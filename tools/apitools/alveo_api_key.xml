@@ -1,8 +1,8 @@
-<tool id="alveo_api_key_storer" name="Store Alveo API Key" version="0.01">
+<tool id="alveo_api_key_storer" name="Store Alveo API Key" version="1.0">
     <description>for use with Alveo tools</description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">

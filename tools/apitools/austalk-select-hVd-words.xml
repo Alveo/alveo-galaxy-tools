@@ -1,8 +1,8 @@
-<tool id="austalk-select-hvd-words" name="Find HVD words in Austalk" version="0.01">
+<tool id="austalk-select-hvd-words" name="Find HVD words in Austalk" version="1.0">
     <description>for a single speaker</description>
 
     <requirements>
-        <requirement type="package" version="1.0.4">pyalveo</requirement>
+        <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">
