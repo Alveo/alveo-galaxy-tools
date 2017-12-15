@@ -1,23 +1,28 @@
-<tool id="alveo_get_item_data" name="Get Alveo Data for Items" version="1.0">
-    <description>Downloads files from the items in an Galaxy list of items</description>
+<tool id="alveo_get_item_data" name="Get Alveo Data" version="1.0">
+    <description>Downloads files from the items in an item list</description>
 
     <requirements>
         <requirement type="package" version="1.0.5">pyalveo</requirement>
     </requirements>
 
     <command interpreter="python">
-        alveo_get_item_data.py --api_key $api_key --item_list $item_list --patterns $patterns,$patternselect --output_path ItemListData
+        alveo_get_item_data.py --api_key $api_key --item_list $item_list  --patterns $patterns,$patternselect --output_path ItemListData
     </command>
 
     <inputs>
-        <param name="api_key" type="data" format="auth_token" label="API Key" help="Your Alveo API key"/>
-        <param name="item_list" type="data" format="item_list" label="Item List (table)" help=""/>
+        <param name="api_key" type="data" format="auth_token"
+               label="API Key" help="Your Alveo API key (use Store Alveo API Key to get this)"/>
 
-        <param name="patternselect" type="select" multiple="true" label="Predefined imports" display="checkboxes">
-            <option value='*'>All Files</option>
+        <param name="item_list" type="data"
+               format="item_list" label="Item List (table)"
+               help="Item list (use Import Item List tool to get this)"/>
+
+        <param name="patternselect" type="select" multiple="false"
+               label="Predefined imports" display="radio">
+            <option value='PRIMARYTEXT'>Primary text of each item (best for text analysis)</option>
             <option value='*speaker16.wav'>Austalk 16bit/16kHz Speaker Headset WAV (*speaker16.wav)</option>
-            <option value='*plain.txt'>Plain text documents (*plain.txt)</option>
             <option value='*.txt'>All text documents (*.txt)</option>
+            <option value='*'>All files attached to item (*)</option>
             <option value=''>Other - enter pattern below</option>
         </param>
 
@@ -50,9 +55,25 @@
                     </element>
             </output_collection>
         </test>
+        <test>
+            <param name="api_key" value="api-key.dat"/>
+            <param name="item_list" value="item_list_189.dat"/>
+            <param name="patterns" value=""/>
+            <param name="patternselect" value="PRIMARYTEXT"/>
+            <param name="output_path" value="test_out"/>
+            <output_collection name="output1" type="list" count="5">
+                <element name="S1A-001-plain">
+                    <assert_contents>
+                        <has_text_matching expression="forename2 starts on the dot"/>
+                    </assert_contents>
+                </element>
+            </output_collection>
+        </test>
     </tests>
 
-    <help>Downloads files from a local list of Alveo items. You can download all files or those matching a wildcard pattern (e.g. \*.txt).  Results will be stored as a dataset collection in your history.</help>
+    <help>Downloads files from a local list of Alveo items.
+        You can download all files or those matching a wildcard pattern (e.g. \*.txt).
+        Results will be stored as a dataset collection in your history.</help>
     <citations>
         <citation type='bibtex'>
             @article{cassidy2014alveo,

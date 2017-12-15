@@ -5,10 +5,8 @@
     </section>
     <section id="alveo" name="Alveo" version="">
         <tool file="/local_tools/tools/apitools/alveo_api_key.xml"></tool>
-        <tool file="/local_tools/tools/apitools/alveo_data_importer.xml"></tool>
         <tool file="/local_tools/tools/apitools/alveo_get_item_list.xml"></tool>
         <tool file="/local_tools/tools/apitools/alveo_get_item_data.xml"></tool>
-        <tool file="/local_tools/tools/apitools/alveo_get_primary_text.xml"></tool>
         <tool file="/local_tools/tools/apitools/austalk-select-hVd-words.xml"></tool>
     </section>
 
