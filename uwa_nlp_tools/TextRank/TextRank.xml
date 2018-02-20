@@ -1,0 +1,103 @@
+<tool id="TextRank" name="TextRank" version="0.0.1">
+    <description>Implementation for Keyword/Keyphrase Identification</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">networkx</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    TextRank.py -f $input1 -e $exclude_line -d $delimiter -t $toprank $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="this dataset"/>
+        
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+         
+        <param name="toprank" type="text" value="10" label="Provide a number for the extracted keywords/keyphrases to output" help="" />
+  
+
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+
+    <help>
+
+
+**What it does** 
+
+This tool implements the TextRank [1] algorithm
+
+[1] Mihalcea, Rada, and Paul Tarau. Textrank: Bringing order into text. *Proceedings of the 2004 conference on empirical methods in natural language processing*. 2004.
+
+-----
+
+**Example**
+
+**Input(after POS tagging, sentence per line)**
+
+
+
+today|licence|glasses|purpose
+
+fact|eye|hypermetropic correction
+
+glasses
+
+Biomicroscopy|nuclear sclerosis|lens|age
+
+intraocular pressures|optic discs|fundi
+
+
+
+
+
+**Output**
+
+Biomicroscopy|0.0714285714286
+
+eye|0.0714285714286
+
+nuclear sclerosis|0.0714285714286
+
+hypermetropic correction|0.0714285714286
+
+lens|0.0714285714286
+
+optic discs|0.0714285714286
+
+fundi|0.0714285714286
+
+purpose|0.0714285714286
+
+licence|0.0714285714286
+
+intraocular pressures|0.0714285714286
+
+
+    </help>
+</tool>

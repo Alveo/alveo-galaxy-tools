@@ -1,0 +1,151 @@
+<tool id="TrainingLDA" name="Latent Dirichlet Allocation (LDA)" version="0.0.1">
+    <description>Training models</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+        <requirement type="package">numpy</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        TrainingLDA.py -f $input1 -e '$exclude_line' -d $delimiter -t $topnum -l $tab_file -m $tab_file2 -o $tab_file3
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select an input file"/>
+        <param name="topnum" type="text" format="txt" value = "5" label="Number of topics"/>
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+         
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs of the normalised corpus matrix" value="m1"/>
+        <param name="job_name2" type="text" size="25"
+               label="Supply a name for the trained LDA model" value="lda1"/>
+		<param name="job_name3" type="text" size="25"
+               label="Supply a name for the output" value="ldaout1"/>
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+        <data format="txt" name="tab_file2" label="${job_name2}"/>
+        <data format="txt" name="tab_file3" label="${job_name3}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+*What it does**
+
+This tool implements the LDA algorithm [1] for topic modelling.
+
+[1] Blei, David M., Andrew Y. Ng, and Michael I. Jordan. Latent dirichlet allocation. *Journal of machine Learning research* 3.Jan (2003): 993-1022.
+
+-----
+
+
+**Input(after POS tagging, sentence per line)**
+
+-----next_doc-----
+
+today|licence|glasses|purpose
+
+fact|eye|hypermetropic correction
+
+glasses
+
+Biomicroscopy|nuclear sclerosis|lens|age
+
+intraocular pressures|optic discs|fundi
+
+-----next_doc-----
+
+...
+
+...
+
+-----next_doc-----
+
+today
+
+Don|death|Department|Veterans Affairs|gold card
+
+new glasses today|eye|prescription
+
+mild nuclear sclerosis|clear lenses|years
+
+intraocular pressures|optic discs|fundi
+
+
+**Output**
+
+topic -- 1 top 20 topical words 
+
+mild nuclear sclerosis ; clear lenses ; today ; prescription ; death ; eye ; gold card ; intraocular pressures ; years ; optic discs ; Veterans Affairs ; Department ;  ; Don ; new glasses today ; fundi ; lady ; right eye ; reading glasses ; sight ; 
+
+topic -- 2 top 20 topical words 
+
+glasses ;  ; today ; intraocular pressures ; eye ; fundi ; age ; purpose ; fact ; licence ; lens ; Biomicroscopy ; hypermetropic correction ; optic discs ; nuclear sclerosis ; lady ; reading glasses ; suntint ; implants ; good position ; 
+
+topic -- 3 top 20 topical words 
+
+ ; fundi ; new glasses today ; Don ; Department ; optic discs ; Veterans Affairs ; years ; intraocular pressures ; gold card ; eye ; death ; today ; prescription ; clear lenses ; mild nuclear sclerosis ; right eye ; lady ; kind signs ; macular disturbance ; 
+ 
+topic -- 4 top 20 topical words 
+
+lady ; left ; right ; cataracts ; months time ; distance glasses ; reading glasses ; suntint ; implants ; good position ; sight ; right eye ; Professor Constable ; watch ; left eye ; central vision ; macular function ; monthly check ; macular degeneration ; lens opacities ; 
+
+topic -- 5 top 20 topical words 
+
+right eye ; lady ; Macu-Vision ; lens opacities ; macular disturbance ; kind signs ; macular degeneration ; early lens opacities ; watch ; monthly check ; macular function ; central vision ; left eye ; day ; Professor Constable ;  ; implants ; suntint ; reading glasses ; right ; 
+
+
+-----next_doc-----
+
+topic number: 0    probability: 0.0117812364893
+
+topic number: 1    probability: 0.952801091312
+
+topic number: 2    probability: 0.0118811733124
+
+topic number: 3    probability: 0.0117680710956
+
+topic number: 4    probability: 0.0117684277909
+
+-----next_doc-----
+
+...
+
+...
+
+-----next_doc-----
+
+topic number: 0    probability: 0.0111229249078
+
+topic number: 1    probability: 0.0114662223465
+
+topic number: 2    probability: 0.0114826880175
+
+topic number: 3    probability: 0.011196860513
+
+topic number: 4    probability: 0.954731304215
+
+    </help>
+</tool>

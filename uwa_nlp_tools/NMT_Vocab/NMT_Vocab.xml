@@ -1,0 +1,83 @@
+<tool id="NMT_Vocab" name="NMT Vocabulary Generator" version="1.0">
+    <description>Generating vocabulary for neural machine translation</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+        <requirement type="package">funcsigs</requirement>
+        <requirement type="package">tensorflow</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        NMT_Vocab.py --train_source $input1 --train_target $input2 --max_vocab_source $input3 --max_vocab_target $input4 --out_vocab_source $tab_file1 --out_vocab_target $tab_file2
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select the training file in the source language from your history"/>  
+        <param name="input2" type="data" format="txt" label="Select the training file in the target language from your history"/>
+        <param name="input3" type="integer" label="Maximum vocabulary size in the source language" value="50000"/>
+        <param name="input4" type="integer" label="Maximum vocabulary size in the source language"  value="50000"/>  
+         
+        <param name="job_name1" type="text" 
+               label="Supply a name for the output vocabulary in the source language" value="output_source_vocab"/>
+        <param name="job_name2" type="text"
+               label="Supply a name for the output vocabulary in the target language" value="output_target_vocab"/>
+    </inputs>
+    
+    <outputs>
+        <data format="txt" name="tab_file1" label="${job_name1}"/>
+		<data format="txt" name="tab_file2" label="${job_name2}"/>
+    </outputs>
+    <options refresh="True"/>
+    
+    
+<help>
+    
+.. class:: infomark
+
+This tool does not incorporate any stemmer or lemmatiser. 
+It is recommended to be used as a part of a workflow where it connects to text pre-processors for obtaining more accurate results.
+
+Note: This code is a modified version based on the original implementation on https://github.com/tensorflow/nmt
+
+------
+
+**source language**
+The language you want to translate from.
+
+**target language**
+The language you want to translate to.
+
+------
+
+**What it does**
+
+Neural Machine Translation vocabulary generator automatic generate a vocabulary list for inputs, 
+which is the first step for training translation models.
+
+-------
+
+**Example**
+
+**Input Text**
+
+This is a good day
+
+**Output**
+
+this 
+
+is
+
+a
+
+good
+
+day
+
+
+
+
+
+
+    </help>
+</tool>

@@ -1,0 +1,74 @@
+<tool id="StemLemmatizer" name="Stemmer Lemmatizer" version="0.0.1">
+    <description>Stemmer and Lemmatizer</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    PorterStemmer.py -f $input1 -e '$exclude_line' -d $delimiter -s $stemmer $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="this dataset"/>
+        
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This indicates the line to be excluded, which usually needs to be the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger" />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+        
+        <param name="stemmer" type="select" display="radiobuttons" multiple="False" label="Choose a stemmer">
+        	<option value="porter">Porter Stemmer</option>
+        	<option value="lem">WordNet Lemmatiser</option>
+         </param>
+
+
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+
+    <help>
+
+
+**What it does**
+
+
+
+-----
+
+.. class:: infomark 
+
+This tool will only work on properly formatted .txt datasets. 
+
+
+-----
+
+**Example 1**
+
+
+
+**WARNING:** This tool will only work on properly formatted .txt datasets, it does not change the contexts of the text files.
+
+
+    </help>
+</tool>

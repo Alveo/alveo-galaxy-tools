@@ -1,0 +1,33 @@
+<tool id="DocumentSummarisation" name="DocumentSummarisation" version="0.0.1">
+    <description>Document Summarisation Using TextRank</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        DocumentSummarisation.py --input $input1 --ratio $input2 --output $tab_file
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a document to be summarised"/>
+        <param name="input2" type="text" format="txt" value = "0.2" label="Select a ratio"/>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the summarisation output" value="docsum"/>
+
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+       
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
+]]>
+
+    </help>
+</tool>

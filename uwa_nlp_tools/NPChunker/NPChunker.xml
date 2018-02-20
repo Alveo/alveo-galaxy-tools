@@ -1,0 +1,99 @@
+<tool id="NP_Chunking" name="Noun Phrase Chunker" version="0.0.1">
+    <description>Part of Speech Tagging Using Stadford Parser</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">theano</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    NPChunking.py -f $input1 -r '$reg_exp' -e '$exclude_line' -w $wordtag_delimiter -p $phrase_delimiter $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="Select data to be processed"/>
+        
+        <param name="reg_exp" type="text" value = "NP: {&lt;JJ&gt;*&lt;NN.*&gt;+}" label="Supply the regular expression for parsing noun phrases. The default regular expression will identify noun phrases that start with a number of adjectives followed by a number of nouns"/>
+        
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="wordtag_delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating words and their tags. This must be the same as the delimiter used for POS tagging outputs">
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+        
+        <param name="phrase_delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter for separating phrases, e.g. left eye|contact lens" help="Phrase delimiter is used to separate phrases in the same sentence, for example, if the pipe | is used as the delimiter, then an output can be left eye|contact lens.">
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+    <help>
+
+
+**What it does**
+
+Noun Phrase Chunker takes outputs from the POS Tagger as inputs, and identifies and outputs noun phrases based on the regular expression provided.
+
+-----
+
+**Example**
+
+
+
+**Original sentence**
+
+I reviewed ##### today as he told me his driving licence is coming up and he thought he needed glasses for this purpose. 
+
+**Input to Noun Phrase Chunker (after POS tagging)**
+
+I|PRP reviewed|VBD #|# #|# #|# #|# #|# today|NN as|IN he|PRP told|VBD me|PRP his|PRP$ driving|VBG licence|NN is|VBZ coming|VBG up|RB and|CC he|PRP thought|VBD he|PRP needed|VBD glasses|NNS for|IN this|DT purpose|NN .|. 
+
+**Output**
+
+today|licence|glasses|purpose
+
+-----
+
+
+.. class:: infomark 
+
+This tool will only work on the outputs from the POS tagger. Incorrect inputs will crash the program.
+
+
+    </help>
+</tool>

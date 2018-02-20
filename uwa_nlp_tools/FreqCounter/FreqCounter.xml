@@ -1,0 +1,70 @@
+<tool id="FreqCounter" name="FreqCounter" version="1.0">
+    <description>Takes one or more text files and generates a histogram displaying word frequencies</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+        <requirement type="package">matplotlib</requirement>
+        <requirement type="package">numpy</requirement>
+        <requirement type="package">funcsigs</requirement>
+        <requirement type="package">tensorflow</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        FreqCounter.py --input $input1 --stopword $input2 --number $input3 --top $input4 --output $tab_file
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a text file from your history"/>  
+        <param name="input2" type="boolean" label="Exclude stop words" checked="True"/>
+        <param name="input3" type="boolean" label="Exclude numbers" checked="True"/>
+
+        <param name="input4" type="integer" format="integer" label="Provide a number of top words to output"  value="1000"/>  
+         
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the output histogram" value="output_historgram"/>
+    </inputs>
+    
+    <outputs>
+        <data format="png" name="tab_file" label="${job_name}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+    
+.. class:: infomark
+
+This tool does not incorporate any text preprocessor such as lower case converter, stemmer or lemmatiser. It is recommended to be used as a part of a workflow where it connects to text pre-processors for obtaining more accurate statistics.
+
+------
+
+**What it does**
+
+FreqCounter takes one or more .txt files and generates a word-frequency histogram. It also can be used for the initial investigation/exploration of a corpus/text. This tool also demonstrates how to plot and save graphs using Python and Matplotlib library. However, unlike visualisation add-ins that takes the data and display them on the fly, the generated histograms from FreqCounter are saved as .png files.
+
+
+-------
+
+**Example**
+
+**Input Text**
+
+
+**Output Histogram**
+
+.. image:: ${static_path}/AlveoTools/FreqCounter/histogram2.png
+
+------
+
+.. class:: infomark
+
+**Future Work**
+
+This tool can be further improved by adding:
+
+1. Support for excluding special characters  
+2. Support customised image sizes
+
+
+
+    </help>
+</tool>

@@ -1,0 +1,47 @@
+<tool id="Word2Vec" name="Word2Vec" version="0.0.1">
+    <description>Training word embeddings using Word2vec</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        Word2Vec.py -f $input1 -s $size -w $window -m $min -o $tab_file
+    </command>
+
+    <inputs>
+        <param format="txt" name="input1" type="data" multiple="True" label="Select a training dataset"/>
+        <param name="size" type="text" format="txt" value = "100" label="Provide the dimension of word embedding vectors"/>
+ 		<param name="window" type="text" format="txt" value = "5" label="Provide the co-occurring window size"/>
+  		<param name="min" type="text" format="txt" value = "1" label="Provide minimum frequency"/>
+        
+        <param name="job_name" type="text" size="25"
+               label="Provide a name for the word embedding output" value="wordemb"/>
+  
+
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+**What it does**
+
+This tool implements the word2vec algorithm [1] for training word embedding vectors.
+
+[1] Mikolov, Tomas, et al. Distributed representations of words and phrases and their compositionality. *Advances in neural information processing systems*. 2013.
+
+
+**Input**
+
+Raw text files.
+
+**Output**
+
+Word embedding vectors, which can be used for further text processing such as comparing similarities between words.
+
+    </help>
+</tool>

@@ -1,0 +1,144 @@
+<tool id="NMT_Train" name="NMT Training" version="1.0">
+    <description>Neural machine translation -- Models Trainer</description>
+
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+        <requirement type="package">funcsigs</requirement>
+        <requirement type="package">tensorflow</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        nmt.py 
+
+        --train_src $input_train_src
+        --train_tgt $input_train_tgt
+        
+        --dev_src $input_dev_src
+        --dev_tgt $input_dev_tgt
+        
+        --test_src $input_test_src
+        --test_tgt $input_test_tgt
+        
+        --vocab_src $input_vocab_src
+        --vocab_tgt $input_vocab_tgt
+        
+        
+        
+        --out_dir $input19
+        --out_model_info $tab_file1 
+
+        
+        --num_units $input7
+        --num_layers $input8
+        --encoder_type $input9
+        --attention $input10
+        --optimizer $input11
+        --learning_rate $input12
+        --decay_steps $input13
+        --decay_factor $input14
+        --num_train_steps $input15
+        
+        --unit_type $input16
+        --dropout $input17
+        --batch_size $input18
+
+    </command>
+
+    <inputs>
+
+        <param name="input_train_src" type="data" format="txt" label="Training data source language."/>  
+        <param name="input_train_tgt" type="data" format="txt" label="Training data target language."/> 
+        <param name="input_dev_src" type="data" format="txt" label="Development data source language."/>  
+        <param name="input_dev_tgt" type="data" format="txt" label="Development data target language."/> 
+        <param name="input_test_src" type="data" format="txt" label="Test data source language."/>  
+        <param name="input_test_tgt" type="data" format="txt" label="Test data target language."/>    
+        <param name="input_vocab_src" type="data" format="txt" label="Dictionary in source language."/>  
+        <param name="input_vocab_tgt" type="data" format="txt" label="Dictionary in target language."/>      
+        
+        <param name="input19" type="text" format="txt" label="Supply a name of a folder to store trained models" value="my_nmt"/>
+        <param name="job_name1" type="text" 
+               label="Supply a name for output models." value="my_nmt_model"/>
+        
+        <param name="input7" type="integer" label="Network size" value="32"/>
+        <param name="input8" type="integer" label="Network depth."  value="2"/>  
+        <param name="input9" type="select" display="radiobuttons" multiple="False" 
+        	label="For bi, we build num_layers/2 bi-directional layers.For
+      		gnmt, we build 1 bi-directional layer, and (num_layers - 1) uni-
+      		directional layers.">
+        	<option value="uni">uni</option>
+            <option value="bi">bi</option>
+            <option value="gnmt">gnmt</option>
+         </param>
+
+         <param name="input10" type="select" display="radiobuttons" multiple="False" 
+        	label="luong, scaled_luong, bahdanau, normed_bahdanau">
+        	<option value="luong">luong</option>
+            <option value="scaled_luong">scaled_luong</option>
+            <option value="bahdanau">bahdanau</option>
+            <option value="normed_bahdanau">normed_bahdanau</option>
+         </param>
+         
+         <param name="input11" type="select" display="radiobuttons" multiple="False" 
+        	label="choose sgd or adam as the optimizer">
+        	<option value="sgd">sgd</option>
+        	<option value="adam">adam</option>
+         </param>
+         
+         <param name="input12" type="float" label="Learning"  value="1.0"/>  
+         <param name="input13" type="integer" label="Decay steps - how frequent we decay"  value="10000"/>          
+         <param name="input14" type="integer" label="Decay factor - how much we decay"  value="1"/>   
+         <param name="input15" type="integer" label="Num steps to train."  value="10000"/>  
+         
+         
+         <param name="input16" type="select" display="radiobuttons" multiple="False" 
+        	label="choose a network unit type">
+        	<option value="lstm">lstm</option>
+        	<option value="gru">gru</option>
+        	<option value="layer_norm_lstm">layer_norm_lstm</option>
+         </param>
+         <param name="input17" type="float" label="Dropout rate"  value="0.2"/>  
+         <param name="input18" type="integer" label="Batch size"  value="128"/>  
+    </inputs>
+    
+    <outputs>
+        <data format="txt" name="tab_file1" label="${job_name1}"/>
+
+    </outputs>
+
+    
+    
+<help>
+    
+
+**What it does**
+
+This tool implements the Neural Machine Translation models [1, 2, 3].
+
+
+[1] Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio. 2015. Neural machine translation by jointly learning to align and translate. ICLR.
+
+[2] Minh-Thang Luong, Hieu Pham, and Christopher D Manning. 2015. Effective approaches to attention-based neural machine translation. EMNLP.
+
+[3] Ilya Sutskever, Oriol Vinyals, and Quoc V. Le. 2014. Sequence to sequence learning with neural networks. NIPS.
+
+Note: This code is a modified version based on the original implementation on https://github.com/tensorflow/nmt
+
+------
+
+**source language**
+
+The language you want to translate from.
+
+**target language**
+
+The language you want to translate to.
+
+-------
+
+**Output**
+
+The trained model.
+
+
+    </help>
+</tool>

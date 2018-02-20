@@ -1,0 +1,149 @@
+<tool id="TFIDF" name="TFIDF" version="0.0.1">
+    <description>Implementation for Keyword/Keyphrase Identification</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        TFIDF.py -f $input1 -e $exclude_line -d $delimiter -t $toprank -o $tab_file 
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select an input file from your history"/>
+
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+         
+        <param name="toprank" type="text" value="10" label="Provide a number for the extracted keywords/keyphrases to output" help="" />
+        
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the TFIDF" value="myKeywordsTFIDF"/>
+
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+
+**What it does**
+
+This tool implements TFIDF algorithm
+
+**TF:** Term Frequency, which measures how frequently a term occurs in a document. Since every document is different in length, it is possible that a term would appear much more times in long documents than shorter ones. Thus, the term frequency is often divided by the document length (aka. the total number of terms in the document) as a way of normalization: 
+
+TF(t) = (Number of times term t appears in a document) / (Total number of terms in the document).
+
+**IDF:** Inverse Document Frequency, which measures how important a term is. While computing TF, all terms are considered equally important. However it is known that certain terms, such as "is", "of", and "that", may appear a lot of times but have little importance. Thus we need to weigh down the frequent terms while scale up the rare ones, by computing the following: 
+
+IDF(t) = log_e(Total number of documents / Number of documents with term t in it).
+
+-----
+
+**Example**
+
+**Input(after POS tagging, sentence per line)**
+
+-----next_doc-----
+
+today|licence|glasses|purpose
+
+fact|eye|hypermetropic correction
+
+glasses
+
+Biomicroscopy|nuclear sclerosis|lens|age
+
+intraocular pressures|optic discs|fundi
+
+-----next_doc-----
+
+today
+
+Don|death|Department|Veterans Affairs|gold card
+
+new glasses today|eye|prescription
+
+mild nuclear sclerosis|clear lenses|years
+
+intraocular pressures|optic discs|fundi
+
+
+
+**Output**
+
+-----next_doc-----
+
+
+fact|eye|hypermetropic|0.41547589839
+
+correction|0.41547589839
+
+sclerosis|lens|age|0.41547589839
+
+Biomicroscopy|nuclear|0.41547589839
+
+today|licence|glasses|purpose|0.41547589839
+
+pressures|optic|0.207737949195
+
+discs|fundi|0.207737949195
+
+intraocular|0.207737949195
+
+glasses|0.0862190389393
+
+
+-----next_doc-----
+
+
+Don|death|Department|Veterans|0.30438806737
+
+sclerosis|clear|0.30438806737
+
+nuclear|0.30438806737
+
+lenses|years|0.30438806737
+
+mild|0.30438806737
+
+Affairs|gold|0.30438806737
+
+card|0.30438806737
+
+new|0.30438806737
+
+today|eye|prescription|0.30438806737
+
+today|0.30438806737
+
+-----
+
+
+
+    </help>
+</tool>

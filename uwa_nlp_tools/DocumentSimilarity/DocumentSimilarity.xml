@@ -1,0 +1,40 @@
+<tool id="DocumentSimilarity" name="DocumentSimilarity" version="0.0.1">
+    <description>Document Similarity -- retrieve the most similar document from the corpus </description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        DocumentSimilarity.py --doc $input1 --dataset $input2 --dict $input3 --corpus $input4 --modelname $input5 --model $input6 --output $tab_file
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select a document."/>
+        <param name="input2" type="data" format="txt" label="Select a corpus to be compared."/>
+		<param name="input3" type="data" format="txt" label="Select the corpus dictionary file."/>
+		<param name="input4" type="data" format="txt" label="Select the corpus matrix file."/>
+         <param name="input5" type="select" label="Select what model to be used">
+            <option value="lda">LDA</option>
+            <option value="lsi">LSI</option>
+         </param>   
+        <param name="input6" type="data" format="txt" label="Select a trained model"/>
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the similarity output" value="docsimilarity"/>
+
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+       
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
+]]>
+
+    </help>
+</tool>

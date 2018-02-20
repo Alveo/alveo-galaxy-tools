@@ -1,0 +1,137 @@
+<tool id="CvalueProcessor" name="Cvalue" version="0.0.1">
+    <description>Implementation for Term Identification</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    CvalueProcessor.py -f $input1 -e $exclude_line -d $delimiter -t $toprank $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="Select an input dataset"/>
+        
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+         
+        <param name="toprank" type="text" value="30" label="Provide a number for the extracted terms to output" help="" />
+
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+
+    <help>
+
+
+**What it does**
+
+This tool implements the C-value algorithm [1] for domain-specific term extraction.
+
+[1] Frantzi, Katerina, Sophia Ananiadou, and Hideki Mima. Automatic recognition of multi-word terms: the c-value/nc-value method. *International Journal on Digital Libraries* 3.2 (2000): 115-130.
+
+-----
+
+
+**Input(after POS tagging, sentence per line)**
+
+-----next_doc-----
+
+today|licence|glasses|purpose
+
+fact|eye|hypermetropic correction
+
+glasses
+
+Biomicroscopy|nuclear sclerosis|lens|age
+
+intraocular pressures|optic discs|fundi
+
+-----next_doc-----
+
+today
+
+Don|death|Department|Veterans Affairs|gold card
+
+new glasses today|eye|prescription
+
+mild nuclear sclerosis|clear lenses|years
+
+intraocular pressures|optic discs|fundi
+
+
+
+**Output**
+
+intraocular pressures|2.0
+
+optic discs|2.0
+
+right eye|2.0
+
+mild nuclear sclerosis|1.58496250072
+
+new glasses today|1.58496250072
+
+early lens opacities|1.58496250072
+
+macular function|1.0
+
+clear lenses|1.0
+
+central vision|1.0
+
+left eye|1.0
+
+Professor Constable|1.0
+
+gold card|1.0
+
+macular degeneration|1.0
+
+distance glasses|1.0
+
+reading glasses|1.0
+
+good position|1.0
+
+Veterans Affairs|1.0
+
+lens opacities|1.0
+
+macular disturbance|1.0
+
+kind signs|1.0
+
+hypermetropic correction|1.0
+
+months time|1.0
+
+nuclear sclerosis|1.0
+
+monthly check|1.0
+
+    </help>
+</tool>

@@ -1,0 +1,72 @@
+<tool id="POS_Tagging" name="Stanford POS Tagger" version="0.0.1">
+    <description>Part of Speech Tagging Using Stadford Parser</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    POS_Tagging.py -f $input1 -j $java_path -t $tagger_file -s $jar_file $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="this dataset"/>
+
+        <param name="java_path" type="text" value = "/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/" label="default java path"/>
+
+        <param name="tagger_file" type="text"  value = "/home/rui/PhD Code/english-left3words-distsim.tagger" label="Stanford tagger file"/>
+
+        <param name="jar_file" type="text" value = "/home/rui/PhD Code/stanford-postagger.jar" label="Stanford tagger jar"/>
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+    <tests>
+        <test>
+           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="col" value="0"/>
+           <param name="start" value="1"/>
+           <param name="end" value="13"/>
+           <param name="ignore" value="62"/>
+           <param name="fastq" value="No"/>
+           <output name="out_file1" file="trimmer_a_f_c0_s1_e13_i62.dat"/>
+        </test>
+        <test>
+           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="col" value="2"/>
+           <param name="start" value="1"/>
+           <param name="end" value="2"/>
+           <param name="ignore" value="62"/>
+           <param name="fastq" value="No"/>
+           <output name="out_file1" file="trimmer_a_f_c2_s1_e2_i62.dat"/>
+        </test>
+        <test>
+           <param name="input1" value="trimmer_tab_delimited.dat"/>
+           <param name="col" value="2"/>
+           <param name="start" value="2"/>
+           <param name="end" value="-2"/>
+           <param name="ignore" value="62"/>
+           <param name="fastq" value="No"/>
+           <output name="out_file1" file="trimmer_a_f_c2_s2_e-2_i62.dat"/>
+        </test>	
+    </tests>
+
+    <help>
+
+
+**What it does**
+
+DatasetReader takes multiple .txt files as input and merges them into a single output for further processing.
+
+-----
+
+**Example 1**
+
+
+
+**WARNING:** This tool will only work on properly formatted .txt datasets, it does not change the contexts of the text files.
+
+
+    </help>
+</tool>

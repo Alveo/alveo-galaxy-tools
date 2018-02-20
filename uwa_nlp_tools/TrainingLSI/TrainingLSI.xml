@@ -1,0 +1,144 @@
+<tool id="TrainingLSI" name="LSI" version="0.0.1">
+    <description>Training latent semantic indexing models</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        TrainingLSI.py -f $input1 -e '$exclude_line' -d $delimiter -t $topnum -l $tab_file -m $tab_file2 -o $tab_file3 
+    </command>
+
+    <inputs>
+        <param name="input1" type="data" format="txt" label="Select an input file"/>
+        <param name="topnum" type="text" format="txt" value = "5" label="Number of topics"/>
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This is the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Leave it empty if the input is not produced by the Dataset Merger." />
+        
+        <param name="delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter of separating phrases. This must be the same as the delimiter used for NP chunking. Leave it empty if the input is not from NP chunker">
+        	<option value="32"> </option>
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+         
+        <param name="job_name" type="text" size="25"
+               label="Supply a name for the outputs of the normalised corpus matrix" value="lsi_corpusmatrix"/>
+
+        <param name="job_name2" type="text" size="25"
+               label="Supply a name for the trained model" value="lsi_model"/>
+		<param name="job_name3" type="text" size="25"
+               label="Supply a name for the output" value="lsiout1"/>
+    </inputs>
+    <outputs>
+        <data format="txt" name="tab_file" label="${job_name}"/>
+        <data format="txt" name="tab_file2" label="${job_name2}"/>
+        <data format="txt" name="tab_file3" label="${job_name3}"/>
+
+    </outputs>
+    <options refresh="True"/>
+    <help>
+*What it does**
+
+This tool implements the LSI algorithm [1] for topic modelling.
+
+[1] Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K., and Harshman, R. (1990). Indexing by latent semantic analysis. *Journal of the American society for information science*, 41(6), 391.
+
+-----
+
+
+**Input(after POS tagging, sentence per line)**
+
+-----next_doc-----
+
+today|licence|glasses|purpose
+
+fact|eye|hypermetropic correction
+
+glasses
+
+Biomicroscopy|nuclear sclerosis|lens|age
+
+intraocular pressures|optic discs|fundi
+
+-----next_doc-----
+
+...
+
+...
+
+-----next_doc-----
+
+today
+
+Don|death|Department|Veterans Affairs|gold card
+
+new glasses today|eye|prescription
+
+mild nuclear sclerosis|clear lenses|years
+
+intraocular pressures|optic discs|fundi
+
+
+**Output**
+
+topic -- 1 top 20 topical words 
+
+glasses ; fact ; purpose ; age ; licence ; nuclear sclerosis ; hypermetropic correction ; lens ; Biomicroscopy ; fundi ; intraocular pressures ; optic discs ; eye ; mild nuclear sclerosis ; death ; prescription ; Don ; clear lenses ; Veterans Affairs ; new glasses today ; 
+
+topic -- 2 top 20 topical words 
+
+right eye ; lady ; distance glasses ; good position ; suntint ; sight ; reading glasses ; cataracts ; left ; implants ; right ; months time ; left eye ; watch ; Professor Constable ; central vision ; macular function ; monthly check ; day ; macular disturbance ; 
+
+topic -- 3 top 20 topical words 
+
+right eye ; good position ; suntint ; distance glasses ; sight ; left ; right ; cataracts ; implants ; months time ; reading glasses ; macular function ; monthly check ; early lens opacities ; day ; watch ; macular disturbance ; left eye ; Professor Constable ; kind signs ; 
+
+topic -- 4 top 20 topical words 
+
+Biomicroscopy ; purpose ; licence ; age ; nuclear sclerosis ; hypermetropic correction ; lens ; fact ; mild nuclear sclerosis ; death ; prescription ; years ; Don ; clear lenses ; new glasses today ; Department ; Veterans Affairs ; gold card ; glasses ; suntint ; 
+
+-----next_doc-----
+
+topic number: 0    score: -3.03576110519
+
+topic number: 1    score: 0.497574390508
+
+topic number: 2    score: -0.361798125211
+
+topic number: 3    score: 2.31335802951
+
+-----next_doc-----
+
+ ... 
+ 
+ ...
+ 
+-----next_doc-----
+
+topic number: 0    score: -0.559182201148
+
+topic number: 1    score: -3.14072973259
+
+topic number: 2    score: 2.73031191399
+
+topic number: 3    score: 0.379125804613
+
+
+
+    </help>
+</tool>

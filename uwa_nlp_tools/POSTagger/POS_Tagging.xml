@@ -1,0 +1,74 @@
+<tool id="POS_Tagging" name="Stanford POS Tagger" version="0.0.1">
+    <description>Part of Speech Tagging Using Stadford Parser</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">funcsigs</requirement>
+    </requirements>
+
+
+    <command interpreter="python">
+    POS_Tagging.py -f $input1 -j $java_path -t $tagger_file -s $jar_file -e $exclude_line -w $wordtag_delimiter $> $out_file1
+    </command>
+    <inputs>
+        <param format="txt" name="input1" type="data" label="this dataset"/>
+
+        <param name="java_path" type="text" value = "/usr/bin/java" label="default java path"/>
+
+        <param name="tagger_file" type="text"  value = "/Users/rui/Lib/english-left3words-distsim.tagger" label="Stanford tagger model file"/>
+
+        <param name="jar_file" type="text" value = "/Users/rui/Lib/stanford-postagger.jar" label="Stanford tagger jar"/>
+        
+        <param name="exclude_line" type="text" value="-----next_doc-----" label="Provide the line/sentence to be excluded" help="This indicates the line to be excluded, which usually needs to be the same as the file delimiter in Dataset Merger if the input to this tool is from Dataset Merger. Do not include space." />
+        
+        <param name="wordtag_delimiter" type="select" display="radiobuttons" multiple="False" label="Choose the delimiter for word and its tag, e.g. word|NN" help="Word-Tag delimiter is used to separate each word with its tag, for example, if the pipe | is used as the delimiter, then an output can be word|NN.">
+            <option value="124">|</option>
+            <option value="64">@</option>
+            <option value="43">+</option>
+            <option value="60">&lt;</option>
+            <option value="42">*</option>
+            <option value="45">-</option> 
+            <option value="61">=</option>
+            <option value="62">&gt;</option>
+            <option value="63">?</option>
+            <option value="36">$</option>
+            <option value="46">.</option>
+            <option value="58">:</option>
+            <option value="38">&amp;</option>
+            <option value="37">%</option>
+            <option value="94">^</option>
+            <option value="35">&#35;</option>
+         </param>
+    </inputs>
+
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+    <help>
+
+
+**What it does**
+
+This is the python wrapper if Stanford POS Tagger. You need to provide a model file which have an extension .tagger, and a POS Tagger .jar file.
+
+For more information, please refer: https://nlp.stanford.edu/software/tagger.shtml
+
+-----
+
+.. class:: infomark 
+
+This tool will only work on properly formatted .txt datasets.  
+
+
+-----
+
+**Example 1**
+
+
+
+**WARNING:** This tool will only work on properly formatted .txt datasets, it does not change the contexts of the text files.
+
+
+    </help>
+</tool>

@@ -1,0 +1,29 @@
+<tool id="WordSim" name="WordSim" version="0.0.1">
+    <description>Compute Word Similarity using word2vec model</description>
+
+    <requirements>
+        <requirement type="package" version="3.0.4">nltk</requirement>
+        <requirement type="package">gensim</requirement>
+    </requirements>
+
+    
+    <command interpreter="python">
+        WordSim.py -e '$equ' -f $input1 > $out_file1
+    </command>
+
+    <inputs>
+        <param format="txt" name="input1" type="data" multiple="True" label="Trained word2vec model"/>
+		<param name="equ" type="text" value="" label="Provide words for vector linear computation" help="Example: king-man+woman or cars-car+computer" />
+    </inputs>
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+    
+    <options refresh="True"/>
+    <help>
+        <![CDATA[
+Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
+]]>
+
+    </help>
+</tool>
