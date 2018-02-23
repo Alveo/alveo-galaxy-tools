@@ -4,9 +4,7 @@ Created on Jul 1, 2017
 @author: ruiwang
 '''
 import sys
-from gensim.summarization import summarize
 from gensim import corpora, models, similarities
-import gensim
 import argparse
 
 
@@ -34,8 +32,6 @@ def process(file, dict, dataset, corpus_name, model_name, input_model, output):
 
     dictionary = corpora.Dictionary.load(dict) 
     corpus = corpora.MmCorpus(corpus_name)
-    #for c in corpus:
-
     
     if model_name == "lda":
         model = models.LdaModel.load(input_model)
@@ -45,12 +41,9 @@ def process(file, dict, dataset, corpus_name, model_name, input_model, output):
     doc = open(file, 'r').read()
     vec_bow = dictionary.doc2bow(doc.lower().split())
     doc_vec_rep = model[vec_bow]
-    #print(vec_lsi)
-    
+
     
     index = similarities.MatrixSimilarity(model[corpus])
-    #index.save("simIndex.index")
-    #index = similarities.MatrixSimilarity.load(term_corpus_dir + "simIndex.index")
 
     sims = index[doc_vec_rep]
     sims = sorted(enumerate(sims), key=lambda item: -item[1])

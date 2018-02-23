@@ -3,7 +3,6 @@
 
     <requirements>
         <requirement type="package" version="3.0.4">nltk</requirement>
-        <requirement type="package">funcsigs</requirement>
     </requirements>
 
 

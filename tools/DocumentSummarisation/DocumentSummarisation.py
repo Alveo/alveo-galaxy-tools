@@ -4,7 +4,6 @@ Created on Jun 26, 2017
 @author: ruiwang
 '''
 import sys
-from gensim.summarization import summarize
 import gensim
 import argparse
 import Helper as utility
@@ -41,12 +40,9 @@ def process(input_file, input_ratio, output):
         for line in infile:
             line = utility.lemmatize_text(line.rstrip( '\r\n' ))
             if line:
-                #print line
                 sents += line + ' '
         if sents:
-            summ = summarize(sents, ratio=rat)  
-            #print summ
-            #print "-------------"
+            summ = gensim.summarization.summarize(sents, ratio=rat)  
             dict_f = open(output, 'a')  
             for s in summ:
                 dict_f.write(s)       

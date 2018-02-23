@@ -4,12 +4,7 @@ Created on Jun 26, 2017
 @author: ruiwang
 '''
 import sys
-import optparse
-import os
-import nltk
-from gensim import corpora, models, similarities
-import gensim
-from operator import itemgetter
+from gensim import corpora
 import argparse
 from nltk.tokenize import RegexpTokenizer
 

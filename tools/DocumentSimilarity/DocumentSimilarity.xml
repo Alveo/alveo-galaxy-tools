@@ -32,9 +32,7 @@
     </outputs>
     <options refresh="True"/>
     <help>
-        <![CDATA[
-Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
-]]>
+
 
     </help>
 </tool>

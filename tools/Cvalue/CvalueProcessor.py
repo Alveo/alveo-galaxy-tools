@@ -5,11 +5,7 @@ Created on 13Dec.,2016
 '''
 import sys
 import optparse
-import os
-import numpy
-import time 
 import nltk
-import Helper as utility
 import CValue as cvalue
 from operator import itemgetter
 

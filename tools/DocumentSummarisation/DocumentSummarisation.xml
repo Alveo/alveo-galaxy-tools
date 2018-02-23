@@ -2,7 +2,7 @@
     <description>Document Summarisation Using TextRank</description>
 
     <requirements>
-        <requirement type="package" version="3.0.4">nltk</requirement>
+    		<requirement type="package" version="3.0.4">nltk</requirement>
         <requirement type="package">gensim</requirement>
     </requirements>
 
@@ -25,9 +25,7 @@
     </outputs>
     <options refresh="True"/>
     <help>
-        <![CDATA[
-Input is a list of tokens, uses one of the NLTK stemming algorithms to generate a list of word stems.
-]]>
+
 
     </help>
 </tool>

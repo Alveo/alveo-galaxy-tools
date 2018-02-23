@@ -6,14 +6,9 @@ Created on Jun 26, 2017
 
 import sys
 import optparse
-import os
 import nltk
-from gensim import corpora, models, similarities
-import gensim
-from operator import itemgetter
-import argparse
+import gensim 
 from nltk.tokenize import RegexpTokenizer
-import numpy as np
 import Helper as utility
 
 def stop_err( msg ):
@@ -103,7 +98,7 @@ options (listed below) default to 'None' if omitted
         if current_doc:
             documents.append(current_doc)
         
-        dictionary = corpora.Dictionary(documents)      
+        dictionary = gensim.corpora.Dictionary(documents)      
         corpus = [dictionary.doc2bow(text) for text in documents]
         
         gensim.corpora.MmCorpus.serialize(matrix_out, corpus)    

@@ -5,12 +5,8 @@ Created on Jun 26, 2017
 '''
 import sys
 import optparse
-import os
 import nltk
-from gensim import corpora, models, similarities
 import gensim
-from operator import itemgetter
-import argparse
 from nltk.tokenize import RegexpTokenizer
 
 def stop_err( msg ):
@@ -82,8 +78,8 @@ options (listed below) default to 'None' if omitted
     model.save(out_file)
     
     
-    s = model['eye'] 
-    print s
+    #s = model['eye'] 
+    #print s
 
 if __name__ == "__main__":
 

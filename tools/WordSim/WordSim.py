@@ -5,12 +5,9 @@ Created on Jun 26, 2017
 '''
 import sys
 import optparse
-import os
 import nltk
-from gensim import corpora, models, similarities
 import gensim
-from operator import itemgetter
-import argparse
+
 from nltk.tokenize import RegexpTokenizer
 from gensim.models.keyedvectors import KeyedVectors
 
@@ -54,7 +51,6 @@ options (listed below) default to 'None' if omitted
     options, args = parser.parse_args()
     
     input = options.input_txt
-    #print input
     equation = options.equ
     
     model =  gensim.models.Word2Vec.load(input) 

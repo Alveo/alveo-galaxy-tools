@@ -5,7 +5,6 @@ Created on 13Dec.,2016
 '''
 import sys
 import optparse
-import os
 import nltk
 from GraphBuilder import GraphBuilder
 import networkx as netx

@@ -6,8 +6,6 @@ Created on 27 Oct 2016
 import sys
 import optparse
 import os
-import numpy
-import time 
 import nltk
 from nltk.tag.stanford import StanfordPOSTagger
 
