@@ -1,0 +1,25 @@
+
+<tool id="LIFWrapper" name="LIF Wrapper" version="0.01" force_history_refresh="True">
+    <description>Creates a sample data set</description>
+    
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+    
+    <command interpreter="python">
+        LIFWrapper.py --input $input -t $is_tok -s $is_sent $> $out_file1
+    </command>
+
+    <inputs>
+        <param format="txt" name="input" type="data" label="this dataset"/>
+        
+        <param name="is_tok" type="boolean" label="Tokenising document" checked="True"/>
+        
+        <param name="is_sent" type="boolean" label="Splitting sentences" checked="True"/>
+    </inputs>
+    
+    
+    <outputs>
+        <data format="input" name="out_file1"  metadata_source="input"/>
+    </outputs>
+</tool>

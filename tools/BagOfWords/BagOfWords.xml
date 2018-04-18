@@ -1,0 +1,44 @@
+<tool id="BagOfWords" name="Bag-of-Words processor" version="0.0.1">
+    <description>Read multiple text files and merge into a single output file for further processing</description>
+    
+    <requirements>
+        <requirement type="package" version="3.2.1">nltk</requirement>
+    </requirements>
+    
+    
+    <command interpreter="python">
+    BagOfWords.py -f $input1 --low $low -s $stopword -c $customised_stopwords -n $number -q $punct --lem $lemmatisation --stem $stemming --pos $pos $> $out_file1
+    </command>
+
+    <inputs>
+       <param format="txt" name="input1" type="data" label="Select data to be processed"/>
+		 
+		<param name="low" type="boolean" label="Convert into lowercases" checked="True"/>
+		
+        <param name="stopword" type="boolean" label="Identify stop words" checked="True"/>
+        
+        <param name="customised_stopwords" type="text" value="" label="Provide additional stopwords to be excluded" help="Use a comma (no space) to delimit words, e.g. ARTICLE,DOC,SENT " />
+        
+        <param name="number" type="boolean" label="Identify numeric tokens" checked="True"/>
+        
+        <param name="punct" type="boolean" label="Identify punctuation" checked="True"/>
+        
+        <param name="lemmatisation" type="boolean" label="Lemmatising" checked="True"/>
+        
+        <param name="stemming" type="boolean" label="Stemming" checked="True"/>
+        
+        <param name="pos" type="boolean" label="POS Tagging" checked="True"/>
+    </inputs>
+    
+    <outputs>
+        <data name="out_file1" format="input" metadata_source="input1"/>
+    </outputs>
+
+    <help>
+
+
+
+
+
+    </help>
+</tool>
